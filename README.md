@@ -15,9 +15,23 @@
 * Gerencia as requisições, rotas, URLs e entre outras funcionalidades,:<br>
 *npm install express*<br>
 
+
 * Instalar o módulo para reiniciar o servidor sempre que houver alteração no código font, "g " significa globalmente:<br>
 *npm install -g nodemon*<br>
 
+* Instalar a dependência para JWT<br>
+*npm install --save jsonwebtoken*
+
+* Gerar um privateKey pelo GeneratePlus,de preferência um hexadecimal
+*https://generate.plus/*
+
+*Gerencia variáveis de ambiente<br>
+*npm install --save dotenv*
+
+* Permitir acesso a API<br>
+*npm install --save cors*
+
+===================================================================================
 * Instalar sequelize que é uma biblioteca javascript que facilita o gerenciamento de um banco de dados SQL:<br>
 *npm install --save sequelize*<br>
 *npm install --save mysql2*
