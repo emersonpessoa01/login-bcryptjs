@@ -27,7 +27,7 @@ app.get("/usuarios", (_, res) => {
 
 app.post("/login", (req, res) => {
   // console.log(req.body.usuario);
-  console.log(req.body);
+  // console.log(req.body);
   if (req.body.usuario === "emersonpessoa" && req.body.senha === "123456") {
     const { id } = 1;
     var privateKey = process.env.SECRET; //somente por meio dessa chave que consegue validar o token
@@ -49,5 +49,5 @@ app.post("/login", (req, res) => {
 });
 
 app.listen(3000, () => {
-  console.log("Servidor iniciado na porta 3000: http://localhost:3000");
+  console.log("Servidor iniciado na porta 3000: http://localhost:3000/usuarios");
 });
