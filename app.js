@@ -18,8 +18,8 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get("/usuarios", (_, res) => {
-  res.json({
+app.get("/usuarios", validartoken, (_, res) => {
+  return res.json({
     error: false,
     mensagem: "Listar usuários!",
   });
@@ -35,19 +35,39 @@ app.post("/login", (req, res) => {
       expiresIn: 600, //10min
     });
 
-    res.json({
+    return res.json({
       error: false,
       mensagem: "Login válido!",
       token,
       // dados: req.body,
     });
   }
-  res.json({
+  return res.json({
     error: true,
     mensagem: "Login ou senha incorreta!",
   });
 });
 
+//verificar se o token é válido
+async function validartoken(req, res, next) {
+  // return res.json({ mensagem: "Validar o token!" });
+  const authHeader = req.headers.authorization;
+  // const [Bearer, token] = authHeader.split(' ')
+  const [, token] = authHeader.split(" ");
+  // return res.json({authHeader})
+  // return res.json({Bearer, token})
+  // return res.json({ token });
+  if(!token){
+  return res.json({
+    error: true,
+    mensagem: "Erro: token inválido!"
+  });
+
+  }
+}
+
 app.listen(3000, () => {
-  console.log("Servidor iniciado na porta 3000: http://localhost:3000/usuarios");
+  console.log(
+    "Servidor iniciado na porta 3000: http://localhost:3000/usuarios"
+  );
 });
