@@ -3,7 +3,8 @@ const app = express();
 const jwt = require("jsonwebtoken");
 const cors = require("cors");
 require("dotenv").config();
-const { promisify } = require("util");
+// const { promisify } = require("util");
+const { eAdmin } = require("./middlewares/auth");
 
 app.use(express.json());
 app.use((req, res, next) => {
@@ -19,7 +20,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get("/usuarios", validartoken, (_, res) => {
+app.get("/usuarios", eAdmin, (_, res) => {
   return res.json({
     error: false,
     mensagem: "Listar usuários!",
@@ -27,6 +28,7 @@ app.get("/usuarios", validartoken, (_, res) => {
 });
 
 app.post("/login", (req, res) => {
+  //verificando os dados estáticos 
   if (req.body.usuario === "emersonpessoa" && req.body.senha === "123456") {
     const { id } = 1;
     var privateKey = process.env.SECRET; //somente por meio dessa chave que consegue validar o token
@@ -47,31 +49,6 @@ app.post("/login", (req, res) => {
     mensagem: "Login ou senha incorreta!",
   });
 });
-
-//verificar se o token é válido
-async function validartoken(req, res, next) {
-  const authHeader = req.headers.authorization;
-  const [_, token] = authHeader.split(" ");
-
-  if (!token) {
-    return res.json({
-      error: true,
-      mensagem: "Erro: Necessário realizar o login para acessar a página!",
-    });
-  }
-
-  //para validar token
-  try {
-    const decode = await promisify(jwt.verify)(token, process.env.SECRET);
-    req.userId = decode.id; //p/ recuperar o id
-    return next();
-  } catch (err) {
-    return res.json({
-      error: true,
-      mensagem: "Erro: Login ou senha inválida!",
-    });
-  }
-}
 
 app.listen(3000, () => {
   console.log(
