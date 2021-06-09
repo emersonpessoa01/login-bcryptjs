@@ -22,7 +22,7 @@
 * Instalar a dependência para JWT<br>
 *npm install --save jsonwebtoken*
 
-* Gerar um privateKey pelo GeneratePlus,de preferência um hexadecimal
+* Gerar um privateKey pelo GeneratePlus, de preferência um hexadecimal
 *https://generate.plus/*
 
 *Gerencia variáveis de ambiente<br>
@@ -31,7 +31,7 @@
 * Permitir acesso a API<br>
 *npm install --save cors*
 
-===================================================================================
+===========================================================================
 * Instalar sequelize que é uma biblioteca javascript que facilita o gerenciamento de um banco de dados SQL:<br>
 *npm install --save sequelize*<br>
 *npm install --save mysql2*
