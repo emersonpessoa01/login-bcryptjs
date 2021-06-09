@@ -3,6 +3,7 @@ const app = express();
 const jwt = require("jsonwebtoken");
 const cors = require("cors");
 require("dotenv").config();
+const { promisify } = require("util");
 
 app.use(express.json());
 app.use((req, res, next) => {
@@ -26,13 +27,12 @@ app.get("/usuarios", validartoken, (_, res) => {
 });
 
 app.post("/login", (req, res) => {
-  // console.log(req.body.usuario);
-  // console.log(req.body);
   if (req.body.usuario === "emersonpessoa" && req.body.senha === "123456") {
     const { id } = 1;
     var privateKey = process.env.SECRET; //somente por meio dessa chave que consegue validar o token
     var token = jwt.sign({ id }, privateKey, {
-      expiresIn: 600, //10min
+      // expiresIn: 600, //10min
+      expiresIn: "7d", //7 dias
     });
 
     return res.json({
@@ -50,19 +50,26 @@ app.post("/login", (req, res) => {
 
 //verificar se o token é válido
 async function validartoken(req, res, next) {
-  // return res.json({ mensagem: "Validar o token!" });
   const authHeader = req.headers.authorization;
-  // const [Bearer, token] = authHeader.split(' ')
-  const [, token] = authHeader.split(" ");
-  // return res.json({authHeader})
-  // return res.json({Bearer, token})
-  // return res.json({ token });
-  if(!token){
-  return res.json({
-    error: true,
-    mensagem: "Erro: token inválido!"
-  });
+  const [_, token] = authHeader.split(" ");
 
+  if (!token) {
+    return res.json({
+      error: true,
+      mensagem: "Erro: Necessário realizar o login para acessar a página!",
+    });
+  }
+
+  //para validar token
+  try {
+    const decode = await promisify(jwt.verify)(token, process.env.SECRET);
+    req.userId = decode.id; //p/ recuperar o id
+    return next();
+  } catch (err) {
+    return res.json({
+      error: true,
+      mensagem: "Erro: Login ou senha inválida!",
+    });
   }
 }
 
