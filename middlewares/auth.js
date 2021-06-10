@@ -2,9 +2,9 @@ const jwt = require("jsonwebtoken");
 const { promisify } = require("util");
 require("dotenv").config();
 
-module.exports ={
-  eAdmin: //verificar se o token é válido
-  async function(req, res, next) {
+module.exports = {
+  //verificar se o token é válido
+  eAdmin: async function (req, res, next) {
     const authHeader = req.headers.authorization;
     const [_, token] = authHeader.split(" ");
 
@@ -26,5 +26,6 @@ module.exports ={
         mensagem: "Erro: Login ou senha inválida!",
       });
     }
-  }
-}
+  },
+};
+ 

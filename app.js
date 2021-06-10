@@ -5,6 +5,7 @@ const cors = require("cors");
 require("dotenv").config();
 // const { promisify } = require("util");
 const { eAdmin } = require("./middlewares/auth");
+const db = require("./models/db")
 
 app.use(express.json());
 app.use((req, res, next) => {
@@ -28,7 +29,7 @@ app.get("/usuarios", eAdmin, (_, res) => {
 });
 
 app.post("/login", (req, res) => {
-  //verificando os dados estáticos 
+  //verificando os dados estáticos
   if (req.body.usuario === "emersonpessoa" && req.body.senha === "123456") {
     const { id } = 1;
     var privateKey = process.env.SECRET; //somente por meio dessa chave que consegue validar o token

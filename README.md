@@ -32,14 +32,16 @@
 *npm install --save cors*
 
 ===========================================================================
-* Instalar sequelize que é uma biblioteca javascript que facilita o gerenciamento de um banco de dados SQL:<br>
-*npm install --save sequelize*<br>
+*Intslar o drive do banco de dados<br>
 *npm install --save mysql2*
+* Sequelize que é uma biblioteca javascript que facilita o gerenciamento de um banco de dados SQL<br>
+*npm install --save sequelize*<br>
 * Instalar o Workbench<br>
 * Criar a base de dados executando o seguinte comando:<br>
-*CREATE DATABASE emersonpessoa CHARACTER SET utf8mb4 collate utf8mb4_unicode_ci*
+*CREATE DATABASE reac_imersao_8_0 CHARACTER SET utf8mb4 collate utf8mb4_unicode_ci*
+* Verificar a versão do MySQL onstalado na máquina<br>
+*mysql -u root -p*
 * Permitir acesso a API<br>
-*npm install --save cors*
 *npm install --save path*
 
 * Multer é um middleware node.js para manipulação multipart/form-data, usado para o upload de arquivos<br>
