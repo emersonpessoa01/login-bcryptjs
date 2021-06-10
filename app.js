@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcryptjs");
 const cors = require("cors");
 require("dotenv").config();
 // const { promisify } = require("util");
@@ -22,33 +23,47 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get("/usuario", eAdmin, (_, res) => {
+app.get("/usuarios", eAdmin, (_, res) => {
   return res.json({
     error: false,
     mensagem: "Listar usuários!",
   });
 });
 
-app.post("/login", (req, res) => {
-  //verificando os dados estáticos
-  if (req.body.usuario === "emersonpessoa" && req.body.senha === "123456") {
-    const { id } = 1;
-    var privateKey = process.env.SECRET; //somente por meio dessa chave que consegue validar o token
-    var token = jwt.sign({ id }, privateKey, {
-      // expiresIn: 600, //10min
-      expiresIn: "7d", //7 dias
-    });
-
+app.post("/login", async (req, res) => {
+  const usuario = await Usuario.findOne({
+    where: {
+      email: req.body.usuario,
+    },
+  });
+  if (usuario === null) {
     return res.json({
-      error: false,
-      mensagem: "Login válido!",
-      token,
-      // dados: req.body,
+      error: true,
+      mensagem: "Error: Usuário não encontrado!",
     });
   }
+
+  //para comparar a senha no req.body com a senha criptografada no db
+  if (!(await bcrypt.compare(req.body.senha, usuario.senha))) {
+    return res.json({
+      error: true,
+      mensagem: "Error: Senha inválida!",
+    });
+  }
+
+  //verificando os dados estáticos
+  // const { id } = 1; //id estático
+  // var privateKey = process.env.SECRET; //somente por meio dessa chave que consegue validar o token
+  var token = jwt.sign({ id: usuario.id }, process.env.SECRET, {
+    // expiresIn: 600, //10min
+    expiresIn: "7d", //7 dias
+  });
+
   return res.json({
-    error: true,
-    mensagem: "Login ou senha incorreta!",
+    error: false,
+    mensagem: "Login realizado com sucesso!",
+    token,
+    // dados: req.body,
   });
 });
 
@@ -57,8 +72,9 @@ app.post("/usuario", async (req, res) => {
   // return res.json({
   //   dados: req.body,
   let dados = req.body;
+  dados.senha = await bcrypt.hash(dados.senha, 8);
 
-  await Usuario.create(req.body)
+  await Usuario.create(dados)
     .then(() => {
       return res.json({
         error: false,
