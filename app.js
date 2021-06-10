@@ -5,7 +5,8 @@ const cors = require("cors");
 require("dotenv").config();
 // const { promisify } = require("util");
 const { eAdmin } = require("./middlewares/auth");
-const db = require("./models/db")
+const db = require("./models/db");
+const Usuario = require("./models/Usuario");
 
 app.use(express.json());
 app.use((req, res, next) => {
@@ -21,7 +22,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get("/usuarios", eAdmin, (_, res) => {
+app.get("/usuario", eAdmin, (_, res) => {
   return res.json({
     error: false,
     mensagem: "Listar usuários!",
@@ -49,6 +50,27 @@ app.post("/login", (req, res) => {
     error: true,
     mensagem: "Login ou senha incorreta!",
   });
+});
+
+app.post("/usuario", async (req, res) => {
+  console.log(req.body);
+  // return res.json({
+  //   dados: req.body,
+  let dados = req.body;
+
+  await Usuario.create(req.body)
+    .then(() => {
+      return res.json({
+        error: false,
+        mensagem: "Usuário cadastrado com sucesso!",
+      });
+    })
+    .catch((err) => {
+      return res.json({
+        error: true,
+        mensagem: "Error: Usuário não cadastrado com sucesso!" + err,
+      });
+    });
 });
 
 app.listen(3000, () => {
