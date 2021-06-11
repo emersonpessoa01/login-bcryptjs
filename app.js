@@ -23,11 +23,51 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get("/usuarios", eAdmin, (_, res) => {
+//Visualizar todos os usuários
+app.get("/usuarios", eAdmin, async (_, res) => {
+  await Usuario.findAll({
+    order: [["id", "DESC"]],
+  })
+    .then((usuarios) => {
+      return res.json({
+        error: false,
+        mensagem: "Usuário encontrado com sucesso!",
+        usuarios,
+      });
+    })
+    .catch(() => {
+      return res.json({
+        error: true,
+        mensagem: "Erro: Nenhum usuário encontrado!",
+      });
+    });
+});
+
+//Visualizar um único usuário e add eAdmin para que usuario esteja logado
+app.get("/usuario/:id", eAdmin, async (req, res) => {
+  await Usuario.findByPk(req.params.id)
+    .then((usuario) => {
+      return res.json({
+        error: false,
+        mensagem: "Usuário cadastrado com sucesso!",
+        usuario,
+      });
+    })
+    .catch(() => {
+      return res.json({
+        error: true,
+        mensagem: "Erro: Usuário não cadastrado com sucesso!",
+      });
+    });
+});
+
+//Editar usuário
+app.put("/usuario", eAdmin, async (req, res) => {
+  let dados = req.body;
   return res.json({
-    error: false,
-    mensagem: "Listar usuários!",
+    dados,
   });
+  dados.senha = await bcrypt.hash(dados.senha);
 });
 
 app.post("/login", async (req, res) => {
@@ -51,11 +91,7 @@ app.post("/login", async (req, res) => {
     });
   }
 
-  //verificando os dados estáticos
-  // const { id } = 1; //id estático
-  // var privateKey = process.env.SECRET; //somente por meio dessa chave que consegue validar o token
   var token = jwt.sign({ id: usuario.id }, process.env.SECRET, {
-    // expiresIn: 600, //10min
     expiresIn: "7d", //7 dias
   });
 
@@ -67,10 +103,8 @@ app.post("/login", async (req, res) => {
   });
 });
 
+//Cadastrar usuário por vez
 app.post("/usuario", async (req, res) => {
-  console.log(req.body);
-  // return res.json({
-  //   dados: req.body,
   let dados = req.body;
   dados.senha = await bcrypt.hash(dados.senha, 8);
 
