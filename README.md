@@ -25,7 +25,7 @@
 * Gerar um privateKey pelo GeneratePlus, de preferência um hexadecimal
 *https://generate.plus/*
 
-*Gerencia variáveis de ambiente<br>
+* Gerencia variáveis de ambiente<br>
 *npm install --save dotenv*
 
 * Permitir acesso a API<br>

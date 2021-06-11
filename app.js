@@ -70,6 +70,7 @@ app.put("/usuario", eAdmin, async (req, res) => {
   dados.senha = await bcrypt.hash(dados.senha);
 });
 
+//Cadastrar usuários
 app.post("/login", async (req, res) => {
   const usuario = await Usuario.findOne({
     where: {

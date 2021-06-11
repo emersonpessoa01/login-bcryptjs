@@ -24,7 +24,7 @@ const Usuario  = db.define("Usuarios",{
   }
 })
 
-//Caso não a tebela, crie a tabela no MySQL
+//Caso não exista a tebela, crie a tabela no MySQL
 Usuario.sync()
 
 module.exports = Usuario
