@@ -30,7 +30,7 @@
 
 * Permitir acesso a API<br>
 *npm install --save cors*
-*Intalar o drive do banco de dados<br>
+* Instalar o drive do banco de dados<br>
 *npm install --save mysql2*
 * Sequelize que é uma biblioteca javascript que facilita o gerenciamento de um banco de dados SQL<br>
 *npm install --save sequelize*<br>
