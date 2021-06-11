@@ -11,7 +11,7 @@ const db = require("./models/db");
 const Usuario = require("./models/Usuario");
 const port = 3001
 
-// app.use("/files", express.static(path.resolve(__dirname, "public", "upload")));
+app.use("/files", express.static(path.resolve(__dirname, "public", "upload")));
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
