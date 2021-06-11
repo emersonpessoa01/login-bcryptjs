@@ -3,11 +3,19 @@ const app = express();
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const cors = require("cors");
+const path = require("path");
 require("dotenv").config();
 // const { promisify } = require("util");
 const { eAdmin } = require("./middlewares/auth");
 const db = require("./models/db");
 const Usuario = require("./models/Usuario");
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+  });
+}
 
 app.use(express.json());
 app.use((req, res, next) => {
