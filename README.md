@@ -4,11 +4,11 @@
 <hr>
 
 ### Descrição:
-- Backend vinculado ao Frontend(client)<br>
-- "npm run dev" para iniciar tanto api quanto o client<br>
+- Backend vinculado ao Frontend(login)<br>
+- "npm run dev" para iniciar tanto api quanto o login<br>
 - Rota raiz: localhost:3000<br>- Métodos get, post, put e delete.Todos testados.Ok!<br>
 
-#### Sequência para criar o projeto
+#### Sequência para criar o projeto backend
 * Criar arquivo package.json:<br>
 *npm init -y*<br>
 
@@ -50,6 +50,11 @@
 *npm install --save multer*
 
 =====================================================================
+#### Sequência para criar o projeto frontend
+* Criar projeto react<br>
+*npm init react-app <nome_app>*<br>
 
+* Rodar projeto react<br>
+*npm run dev*<br>
 
 

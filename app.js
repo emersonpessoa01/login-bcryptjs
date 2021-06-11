@@ -9,6 +9,9 @@ require("dotenv").config();
 const { eAdmin } = require("./middlewares/auth");
 const db = require("./models/db");
 const Usuario = require("./models/Usuario");
+const port = 3001
+
+app.use("/files", express.static(path.resolve(__dirname, "public", "upload")));
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
@@ -174,8 +177,14 @@ app.post("/usuario", async (req, res) => {
     });
 });
 
-app.listen(3000, () => {
+app.get("/",(req, res)=>{
+  res.json({
+    mensagem:"Olá, Emerson Pessoa"
+  })
+})
+
+app.listen(3001, () => {
   console.log(
-    "Servidor iniciado na porta 3000: http://localhost:3000/usuarios"
+    "Servidor iniciado na porta 3001: http://localhost:3001"
   );
 });
