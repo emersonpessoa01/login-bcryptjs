@@ -43,7 +43,7 @@
 *npm install --save bcryptjs*
 * Permitir acesso a API<br>
 *npm install --save path*
-* Execute vários comandos simultaneamente<br>
+* Executar vários comandos simultaneamente<br>
 *npm install --save concurrently*
 
 * Multer é um middleware node.js para manipulação multipart/form-data, usado para o upload de arquivos<br>
