@@ -31,14 +31,14 @@ app.get("/usuarios", eAdmin, async (_, res) => {
     .then((usuarios) => {
       return res.json({
         error: false,
-        mensagem: "Usuário encontrado com sucesso!",
+        message: "Usuário encontrado com sucesso!",
         usuarios,
       });
     })
     .catch(() => {
       return res.json({
         error: true,
-        mensagem: "Erro: Nenhum usuário encontrado!",
+        message: "Erro: Nenhum usuário encontrado!",
       });
     });
 });
@@ -49,14 +49,14 @@ app.get("/usuario/:id", eAdmin, async (req, res) => {
     .then((usuario) => {
       return res.json({
         error: false,
-        mensagem: "Usuário cadastrado com sucesso!",
+        message: "Usuário encontrado com sucesso!",
         usuario,
       });
     })
     .catch(() => {
       return res.json({
         error: true,
-        mensagem: "Erro: Usuário não cadastrado com sucesso!",
+        message: "Erro: Usuário não encontrado com sucesso!",
       });
     });
 });
@@ -64,10 +64,52 @@ app.get("/usuario/:id", eAdmin, async (req, res) => {
 //Editar usuário
 app.put("/usuario", eAdmin, async (req, res) => {
   let dados = req.body;
-  return res.json({
-    dados,
-  });
-  dados.senha = await bcrypt.hash(dados.senha);
+  dados.senha = await bcrypt.hash(dados.senha, 8);
+
+  await Usuario.update(dados, {
+    where: {
+      id: dados.id,
+    },
+  })
+    .then(() => {
+      return res.json({
+        error: false,
+        message: "Usuário editado com sucesso!",
+      });
+    })
+    .catch(() => {
+      return res.json({
+        error: true,
+        message: "Error: Usuário não editado com sucesso!",
+      });
+    });
+
+  // return res.json({
+  //   dados,
+  // });
+});
+
+//Apagar usuário
+app.delete("/usuario/:id", eAdmin, async (req, res) => {
+  let id = req.params.id;
+  await Usuario.destroy({
+    where: {
+      id,
+    },
+  })
+    .then(() => {
+      return res.json({
+        error: false,
+        message: "Usuário apagado com sucesso!",
+        dados: id,
+      });
+    })
+    .catch(() => {
+      return res.json({
+        error: true,
+        message: "Erro: Usuário não apagado com sucesso!",
+      });
+    });
 });
 
 //Cadastrar usuários
@@ -80,7 +122,7 @@ app.post("/login", async (req, res) => {
   if (usuario === null) {
     return res.json({
       error: true,
-      mensagem: "Error: Usuário não encontrado!",
+      message: "Error: Usuário não encontrado!",
     });
   }
 
@@ -88,7 +130,7 @@ app.post("/login", async (req, res) => {
   if (!(await bcrypt.compare(req.body.senha, usuario.senha))) {
     return res.json({
       error: true,
-      mensagem: "Error: Senha inválida!",
+      message: "Error: Senha inválida!",
     });
   }
 
@@ -98,13 +140,13 @@ app.post("/login", async (req, res) => {
 
   return res.json({
     error: false,
-    mensagem: "Login realizado com sucesso!",
+    message: "Login realizado com sucesso!",
     token,
     // dados: req.body,
   });
 });
 
-//Cadastrar usuário por vez
+//Cadastrar usuário um por vez
 app.post("/usuario", async (req, res) => {
   let dados = req.body;
   dados.senha = await bcrypt.hash(dados.senha, 8);
@@ -113,13 +155,13 @@ app.post("/usuario", async (req, res) => {
     .then(() => {
       return res.json({
         error: false,
-        mensagem: "Usuário cadastrado com sucesso!",
+        message: "Usuário cadastrado com sucesso!",
       });
     })
     .catch((err) => {
       return res.json({
         error: true,
-        mensagem: "Error: Usuário não cadastrado com sucesso!" + err,
+        message: "Error: Usuário não cadastrado com sucesso!" + err,
       });
     });
 });
