@@ -133,7 +133,7 @@ app.post("/login", async (req, res) => {
   if (usuario === null) {
     return res.json({
       error: true,
-      message: "Error: Usuário não encontrado!",
+      message: "Error: Usuário incorreto!",
     });
   }
 
@@ -141,7 +141,7 @@ app.post("/login", async (req, res) => {
   if (!(await bcrypt.compare(req.body.senha, usuario.senha))) {
     return res.json({
       error: true,
-      message: "Error: Senha inválida!",
+      message: "Error: Senha incorreta!",
     });
   }
 

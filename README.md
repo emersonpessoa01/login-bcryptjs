@@ -60,7 +60,10 @@
 * Dependência para gerenciar as rotas<br>
 *npm install --save react-router-dom*<br>
 
-* Gerenciar chmadas para API<br>
+* Gerenciar chamadas para API<br>
 *npm install --save axios*<br>
+
+* Utilizando para mudar de página e renderizar a nova página sem recarregar toda a aplicação<br>
+*npm install --save history@4.9.0*<br>
 
 

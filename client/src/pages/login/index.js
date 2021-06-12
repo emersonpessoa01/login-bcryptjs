@@ -1,11 +1,20 @@
-import React, { useState } from "react";
-import axios from "axios";
-import { api } from "../../config/index";
+import React, { useState, useContext } from "react";
+// import axios from "axios";
+import api from "../../config/index";
+import { Context } from "../../Context/AuthContext";
 
 export const Login = () => {
+  const { authenticated } = useContext(Context);
+  console.log("Situação: " + authenticated);
+
   const [dadosUsuario, setDadosUsuario] = useState({
     usuario: "",
     senha: "",
+  });
+
+  const [status, setStatus] = useState({
+    type: "",
+    mensagem: "",
   });
 
   const valorInput = (e) => {
@@ -16,31 +25,51 @@ export const Login = () => {
     });
   };
 
-  const loginSubmit = async (e) => {
+  const loginSubmit = (e) => {
     e.preventDefault();
-    console.log(dadosUsuario.usuario);
-    console.log(dadosUsuario.senha);
+    // console.log(dadosUsuario.usuario);
 
     const headers = {
       "Content-Type": "application/json",
     };
 
-    await axios
-      .post(api + "/login", dadosUsuario, { headers })
-      .then((response)=>{
-        console.log(response.data.error)
-        console.log(response.data.message)
-        console.log(response.data.token)
+    api
+      .post("/login", dadosUsuario, { headers })
+      .then((response) => {
+        console.log(response.data.error);
+        console.log(response.data.message);
+        console.log(response.data.token);
+        if (response.data.error) {
+          setStatus({
+            type: "error",
+            mensagem: response.data.message,
+          });
+        } else {
+          setStatus({
+            type: "success",
+            mensagem: response.data.message,
+          });
+          //Salvar o token no localStorage
+          localStorage.setItem("token", JSON.stringify(response.data.token));
+          api.default.headers.Authoriation = `Bearer ${response.data.token}`;
+        }
       })
-      .catch(()=>{
-        console.log("Erro: Usuário ou senha incorreta!")
+      .catch(() => {
+        setStatus({
+          type: "error",
+          mensagem: "Erro: Tente mais tarde!",
+        });
       });
   };
 
   return (
     <div>
       <h1>Login</h1>
+      <hr />
+      {status.type === "error" ? <p>{status.mensagem}</p> : ""}
+      {status.type === "success" ? <p>{status.mensagem}</p> : ""}
       <form onSubmit={loginSubmit}>
+        <label>Usuário: </label>
         <input
           autoFocus
           type="text"
@@ -50,11 +79,12 @@ export const Login = () => {
         />
         <br />
         <br />
-
+        <label>Senha: </label>
         <input
           type="password"
           name="senha"
           placeholder="Digite a senha"
+          autoComplete="on" //para eliminar o alerta
           onChange={valorInput}
         />
         <br />
