@@ -8,8 +8,8 @@
     "start": "node app.js",
     "server1": "nodemon app.js",
     "server": "node app.js",
-    "client": "npm start --prefix login",
-    "dev": "concurrently \"npm run server1\" \"npm run login\""
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server1\" \"npm run client\""
   },
   "nodemonConfig": {
     "ignore": [

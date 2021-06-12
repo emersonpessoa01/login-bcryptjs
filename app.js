@@ -14,9 +14,9 @@ const port = 3001
 app.use("/files", express.static(path.resolve(__dirname, "public", "upload")));
 
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static("login/build"));
+  app.use(express.static("client/build"));
   app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "login", "build", "index.html"));
+    res.sendFile(path.join(__dirname, "client", "build", "index.html"));
   });
 }
 
