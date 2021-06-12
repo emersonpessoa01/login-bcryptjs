@@ -1,9 +1,15 @@
 import React from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { Login } from "./pages/login";
 
 function App() {
   return (
     <div>
-      <h1>Bem-vindo ao React</h1>
+      <Router>
+        <Switch>
+          <Route path="/" component={Login} />
+        </Switch>
+      </Router>
     </div>
   );
 }

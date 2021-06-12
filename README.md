@@ -57,4 +57,10 @@
 * Rodar projeto react<br>
 *npm run dev*<br>
 
+* Dependência para gerenciar as rotas<br>
+*npm install --save react-router-dom*<br>
+
+* Gerenciar chmadas para API<br>
+*npm install --save axios*<br>
+
 
