@@ -183,8 +183,8 @@ app.get("/",(req, res)=>{
   })
 })
 
-app.listen(3001, () => {
+app.listen(port, () => {
   console.log(
-    "Servidor iniciado na porta 3001: http://localhost:3001"
+    `Servidor iniciado na porta ${port}: http://localhost:${port}`
   );
 });

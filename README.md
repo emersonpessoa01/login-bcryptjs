@@ -4,8 +4,8 @@
 <hr>
 
 ### Descrição:
-- Backend vinculado ao Frontend(login)<br>
-- "npm run dev" para iniciar tanto api quanto o login<br>
+- Backend vinculado ao Frontend(client)<br>
+- "npm run dev" para iniciar tanto api quanto o client<br>
 - Rota raiz: localhost:3000<br>- Métodos get, post, put e delete.Todos testados.Ok!<br>
 
 #### Sequência para criar o projeto backend
