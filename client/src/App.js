@@ -1,8 +1,9 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { Login } from "./pages/login";
 import { AuthProvider } from "./Context/AuthContext";
 import { history } from "./services/history";
+import { Login } from "./pages/login";
+import { Dashboard } from "./pages/Dashboard";
 
 function App() {
   return (
@@ -11,7 +12,8 @@ function App() {
       <AuthProvider>
         <Router history={history}>
           <Switch>
-            <Route path="/" component={Login} />
+            <Route exact path="/" component={Login} />
+            <Route path="/Dashboard" component={Dashboard} />
           </Switch>
         </Router>
       </AuthProvider>

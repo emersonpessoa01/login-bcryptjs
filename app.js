@@ -9,7 +9,6 @@ require("dotenv").config();
 const { eAdmin } = require("./middlewares/auth");
 const db = require("./models/db");
 const Usuario = require("./models/Usuario");
-const port = 3001
 
 app.use("/files", express.static(path.resolve(__dirname, "public", "upload")));
 
@@ -183,8 +182,9 @@ app.get("/",(req, res)=>{
   })
 })
 
-app.listen(port, () => {
+const APP_PORT = process.env.PORT || 8080;
+app.listen(APP_PORT, () => {
   console.log(
-    `Servidor iniciado na porta ${port}: http://localhost:${port}`
+    `Servidor iniciado na porta ${APP_PORT}: http://localhost:${APP_PORT}`
   );
 });

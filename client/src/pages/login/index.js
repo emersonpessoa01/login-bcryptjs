@@ -2,8 +2,10 @@ import React, { useState, useContext } from "react";
 // import axios from "axios";
 import api from "../../config/index";
 import { Context } from "../../Context/AuthContext";
+import { useHistory } from "react-router-dom";
 
 export const Login = () => {
+  const history = useHistory();
   const { authenticated } = useContext(Context);
   console.log("Situação: " + authenticated);
 
@@ -27,7 +29,8 @@ export const Login = () => {
 
   const loginSubmit = (e) => {
     e.preventDefault();
-    // console.log(dadosUsuario.usuario);
+    console.log(dadosUsuario.usuario);
+    console.log(dadosUsuario.senha);
 
     const headers = {
       "Content-Type": "application/json",
@@ -51,7 +54,10 @@ export const Login = () => {
           });
           //Salvar o token no localStorage
           localStorage.setItem("token", JSON.stringify(response.data.token));
-          api.defaults.headers.Authoriation = `Bearer ${response.data.token}`;
+          api.defaults.headers.Authorization = `Bearer ${response.data.token}`;
+          setTimeout(() => {
+            return history.push("/dashboard");
+          }, 3500);
         }
       })
       .catch(() => {
