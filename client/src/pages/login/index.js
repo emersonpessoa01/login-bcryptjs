@@ -51,7 +51,7 @@ export const Login = () => {
           });
           //Salvar o token no localStorage
           localStorage.setItem("token", JSON.stringify(response.data.token));
-          api.default.headers.Authoriation = `Bearer ${response.data.token}`;
+          api.defaults.headers.Authoriation = `Bearer ${response.data.token}`;
         }
       })
       .catch(() => {
