@@ -1,4 +1,4 @@
-//Compartilhar dados entre os componentes de forma global
+//createContext - Compartilhar dados entre os componentes de forma global
 //children recebe os dados que os componentes fornecem
 import React, { createContext, useState, useEffect } from "react";
 import api from "../config/index";
