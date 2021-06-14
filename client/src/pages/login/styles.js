@@ -22,6 +22,7 @@ export const Titulo = styled.h1`
   color: #3e3e3e;
   font-size: 27px;
   text-align: center;
+  padding: 20px 5px;
 `;
 
 export const t = styled.input`

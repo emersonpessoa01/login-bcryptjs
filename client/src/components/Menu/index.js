@@ -1,14 +1,24 @@
-import React from "react";
+import React, { useContext } from "react";
 import { NavList } from "./styles";
+import { NavLink } from "react-router-dom";
+import { Context } from "../../Context/AuthContext";
 
 const Menu = () => {
+  const { handleLogout } = useContext(Context);
   return (
     <nav>
       <NavList>
-        <li>Dashboard</li>
+        <NavLink to="/dashboard exact">
+          <li>Dashboard</li>
+        </NavLink>
       </NavList>
       <NavList>
-        <li>Usuários</li>
+        <NavLink to="/listar exact">
+          <li>Usuários</li>
+        </NavLink>
+        <NavLink to="#">
+          <li onClick={handleLogout}>Sair</li>
+        </NavLink>
       </NavList>
     </nav>
   );

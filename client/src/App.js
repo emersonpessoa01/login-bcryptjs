@@ -3,6 +3,7 @@ import { Router, Switch, Route, Redirect } from "react-router-dom";
 import { AuthProvider } from "./Context/AuthContext";
 import { Login } from "./pages/login";
 import { Dashboard } from "./pages/Dashboard";
+import { Listar } from "./pages/Listar";
 import history from "./services/history";
 import { Context } from "./Context/AuthContext";
 
@@ -22,7 +23,13 @@ function App() {
         <Router history={history}>
           <Switch>
             <CustomRoute exact path="/" component={Login} />
-            <CustomRoute isPrivate path="/Dashboard" component={Dashboard} />
+            <CustomRoute
+              isPrivate
+              exact
+              path="/dashboard"
+              component={Dashboard}
+            />
+            <CustomRoute isPrivate exact path="/listar" component={Listar} />
           </Switch>
         </Router>
       </AuthProvider>
