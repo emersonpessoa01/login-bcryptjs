@@ -1,9 +1,9 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { AuthProvider } from "./Context/AuthContext";
-import { history } from "./services/history";
 import { Login } from "./pages/login";
 import { Dashboard } from "./pages/Dashboard";
+import  history  from "./services/history";
 
 function App() {
   return (
