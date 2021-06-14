@@ -27,6 +27,12 @@ const AuthProvider = ({ children }) => {
     return <h1>Carregando...</h1>;
   }
 
+  //função para sair e remover o token
+  async function signIn(sit) {
+    setAuthenticated(sit);
+  }
+
+  //função para sair e remover o token
   function handleLogout() {
     // console.log("Sair")
     setAuthenticated(false);
@@ -36,7 +42,7 @@ const AuthProvider = ({ children }) => {
   }
 
   return (
-    <Context.Provider value={{ authenticated, handleLogout }}>
+    <Context.Provider value={{ authenticated, handleLogout, signIn }}>
       {children}
     </Context.Provider>
   );

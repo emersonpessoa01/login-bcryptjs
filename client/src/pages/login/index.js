@@ -6,7 +6,7 @@ import { useHistory } from "react-router-dom";
 
 export const Login = () => {
   const history = useHistory();
-  const { authenticated } = useContext(Context);
+  const { authenticated, signIn } = useContext(Context);
   console.log("Situação: " + authenticated);
 
   const [dadosUsuario, setDadosUsuario] = useState({
@@ -29,8 +29,8 @@ export const Login = () => {
 
   const loginSubmit = (e) => {
     e.preventDefault();
-    console.log(dadosUsuario.usuario);
-    console.log(dadosUsuario.senha);
+    // console.log(dadosUsuario.usuario);
+    // console.log(dadosUsuario.senha);
 
     const headers = {
       "Content-Type": "application/json",
@@ -39,9 +39,9 @@ export const Login = () => {
     api
       .post("/login", dadosUsuario, { headers })
       .then((response) => {
-        console.log(response.data.error);
-        console.log(response.data.message);
-        console.log(response.data.token);
+        // console.log(response.data.error);
+        // console.log(response.data.message);
+        // console.log(response.data.token);
         if (response.data.error) {
           setStatus({
             type: "error",
@@ -55,6 +55,7 @@ export const Login = () => {
           //Salvar o token no localStorage
           localStorage.setItem("token", JSON.stringify(response.data.token));
           api.defaults.headers.Authorization = `Bearer ${response.data.token}`;
+          signIn();
           setTimeout(() => {
             return history.push("/dashboard");
           }, 3500);
