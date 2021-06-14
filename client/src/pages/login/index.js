@@ -1,8 +1,16 @@
 import React, { useState, useContext } from "react";
-// import axios from "axios";
 import api from "../../config/index";
 import { Context } from "../../Context/AuthContext";
 import { useHistory } from "react-router-dom";
+import {
+  Container,
+  FormLogin,
+  Titulo,
+  Input,
+  ButtomPrimary,
+  AlertDanger,
+  AlertSuccess
+} from "./styles";
 
 export const Login = () => {
   const history = useHistory();
@@ -70,35 +78,30 @@ export const Login = () => {
   };
 
   return (
-    <div>
-      <h1>Login</h1>
-      <hr />
-      {status.type === "error" ? <p>{status.mensagem}</p> : ""}
-      {status.type === "success" ? <p>{status.mensagem}</p> : ""}
-      <form onSubmit={loginSubmit}>
-        <label>Usuário: </label>
-        <input
-          autoFocus
-          type="text"
-          name="usuario"
-          placeholder="Digite o usuário"
-          onChange={valorInput}
-        />
-        <br />
-        <br />
-        <label>Senha: </label>
-        <input
-          type="password"
-          name="senha"
-          placeholder="Digite a senha"
-          autoComplete="on" //para eliminar o alerta
-          onChange={valorInput}
-        />
-        <br />
-        <br />
-
-        <button type="submit">Acessar</button>
-      </form>
-    </div>
+    <Container>
+      <FormLogin>
+        <Titulo>Login</Titulo>
+        <hr />
+        {status.type === "error" ? <AlertDanger>{status.mensagem}</AlertDanger> : ""}
+        {status.type === "success" ? <AlertSuccess>{status.mensagem}</AlertSuccess> : ""}
+        <form onSubmit={loginSubmit}>
+          <Input
+            autoFocus
+            type="text"
+            name="usuario"
+            placeholder="Usuário"
+            onChange={valorInput}
+          />
+          <Input
+            type="password"
+            name="senha"
+            placeholder="Senha"
+            autoComplete="on" //para eliminar o alerta
+            onChange={valorInput}
+          />
+          <ButtomPrimary type="submit">Acessar</ButtomPrimary>
+        </form>
+      </FormLogin>
+    </Container>
   );
 };

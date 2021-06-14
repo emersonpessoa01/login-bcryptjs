@@ -65,5 +65,7 @@
 
 * Utilizando para mudar de página e renderizar a nova página sem recarregar toda a aplicação<br>
 *npm install --save history@4.9.0*<br>
+* Transformar o ccs em componentes<br>
+*npm install --save styled-components*<br>
 
 
