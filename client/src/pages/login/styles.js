@@ -25,7 +25,7 @@ export const Titulo = styled.h1`
   padding: 20px 5px;
 `;
 
-export const t = styled.input`
+export const = styled.input`
   width: 100%;
   padding: 12px;
   border: 1px solid #0d6efd;
