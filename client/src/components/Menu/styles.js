@@ -11,11 +11,11 @@ export const NavList = styled.ul`
     text-decoration: none;
     color:#f9f9f9;
     margin: 0 8px;
-  }
+  } 
 
-  a:hove{
+  a:hover{
     color: #d0d2db;
-    
+
   }
 
   li{

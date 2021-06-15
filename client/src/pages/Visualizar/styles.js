@@ -1,13 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.section`
-  display: flex;
 
-  align-items: center;
-  justify-content: center;
-
-  height: 98vh;
-  width: 100%;
 `;
 
 export const FormLogin = styled.section`

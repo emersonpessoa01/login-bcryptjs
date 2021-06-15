@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Menu from "../../components/Menu";
 import { Link } from "react-router-dom";
+import api from "../../config/index";
+
 import {
   Container,
   ConteudoTitulo,
@@ -14,7 +16,6 @@ import {
   ButtonWarning,
   ButtonDanger,
 } from "../../styles/Custom_adm";
-import api from "../../config/index";
 
 export const Listar = () => {
   const [data, setData] = useState([]);
@@ -23,29 +24,29 @@ export const Listar = () => {
     mensagem: "",
   });
 
-  useEffect(() => {
-    const getUsuarios = async () => {
-      await api
-        .get("/usuarios" + data)
-        .then((response) => {
-          // console.log(response.data)
-
-          if (response.data.error) {
-            setStatus({
-              type: "error",
-              mensagem: response.data.message,
-            });
-          } else {
-            setData(response.data.usuarios);
-          }
-        })
-        .catch(() => {
+  const getUsuarios = async () => {
+    await api
+      .get("/usuarios" + data)
+      .then((response) => {
+        // console.log(response.data)
+        if (response.data.error) {
           setStatus({
             type: "error",
-            mensagem: "Erro: Tente mais tarde!",
+            mensagem: response.data.message,
           });
+        } else {
+          setData(response.data.usuarios);
+        }
+      })
+      .catch(() => {
+        setStatus({
+          type: "error",
+          mensagem: "Erro: Tente mais tarde!",
         });
-    };
+      });
+  };
+
+  useEffect(() => {
     getUsuarios();
   }, [data]);
 
@@ -94,7 +95,7 @@ export const Listar = () => {
                     <ButtonPrimary>Visualizar</ButtonPrimary>
                   </Link>{" "}
                   <Link to={"/editar" + usuario.id}>
-                    <ButtonWarning>Editar</ButtonWarning>{" "}
+                     <ButtonWarning>Editar</ButtonWarning>{" "}
                   </Link>{" "}
                   <Link to={"/apagar" + usuario.id}>
                     <ButtonDanger>Apagar</ButtonDanger>

@@ -6,6 +6,8 @@ import { Dashboard } from "./pages/Dashboard";
 import { Listar } from "./pages/Listar";
 import history from "./services/history";
 import { Context } from "./Context/AuthContext";
+import { Visualizar } from "./pages/Visualizar";
+import { Cadastrar } from "./pages/Cadastrar";
 
 function App() {
   const CustomRoute = ({ isPrivate, ...rest }) => {
@@ -29,11 +31,18 @@ function App() {
               path="/dashboard"
               component={Dashboard}
             />
+            <CustomRoute isPrivate exact path="/listar" component={Listar} />
             <CustomRoute
               isPrivate
               exact
-              path="/listar"
-              component={Listar}
+              path="/visualizar/:id"
+              component={Visualizar}
+            />
+            <CustomRoute
+              isPrivate
+              exact
+              path="/cadastrar"
+              component={Cadastrar}
             />
           </Switch>
         </Router>
