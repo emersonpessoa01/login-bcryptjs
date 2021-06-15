@@ -25,7 +25,7 @@ export const Titulo = styled.h1`
   padding: 20px 5px;
 `;
 
-export const = styled.input`
+export const Input = styled.input`
   width: 100%;
   padding: 12px;
   border: 1px solid #0d6efd;
@@ -50,7 +50,7 @@ export const ButtomPrimary = styled.button`
   border-radius: 4px;
   cursor: pointer;
   font-size: 18px;
-  :hover{
+  :hover {
     background-color: #1636dd;
     color: #fff;
   }
@@ -64,7 +64,6 @@ export const AlertDanger = styled.p`
   border-left: 1px solid #842029;
   border-radius: 4px;
   padding: 7px;
-
 `;
 
 export const AlertSuccess = styled.p`

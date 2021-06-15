@@ -13,10 +13,10 @@ const Menu = () => {
         </NavLink>
       </NavList>
       <NavList>
-        <NavLink to="/listar exact">
+        <NavLink exact to="/listar">
           <li>Usuários</li>
         </NavLink>
-        
+
         {/* Para destruir o token após sair */}
         <NavLink to="#">
           <li onClick={handleLogout}>Sair</li>

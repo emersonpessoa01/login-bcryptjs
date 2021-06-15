@@ -63,7 +63,7 @@ export const Login = () => {
           //Salvar o token no localStorage
           localStorage.setItem("token", JSON.stringify(response.data.token));
           api.defaults.headers.Authorization = `Bearer ${response.data.token}`;
-          signIn();
+          signIn(true);
           setTimeout(() => {
             return history.push("/dashboard");
           }, 3500);
@@ -81,7 +81,6 @@ export const Login = () => {
     <Container>
       <FormLogin>
         <Titulo>Login</Titulo>
-        <hr />
         {status.type === "error" ? <AlertDanger>{status.mensagem}</AlertDanger> : ""}
         {status.type === "success" ? <AlertSuccess>{status.mensagem}</AlertSuccess> : ""}
         <form onSubmit={loginSubmit}>

@@ -29,7 +29,12 @@ function App() {
               path="/dashboard"
               component={Dashboard}
             />
-            <CustomRoute isPrivate exact path="/listar" component={Listar} />
+            <CustomRoute
+              isPrivate
+              exact
+              path="/listar"
+              component={Listar}
+            />
           </Switch>
         </Router>
       </AuthProvider>

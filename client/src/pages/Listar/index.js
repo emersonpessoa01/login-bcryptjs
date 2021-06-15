@@ -9,25 +9,24 @@ import {
   ButtonSuccess,
   Table,
   AlertDanger,
-  Alertsuccess,
+  AlertSuccess,
+  ButtonPrimary,
+  ButtonWarning,
+  ButtonDanger,
 } from "../../styles/Custom_adm";
 import api from "../../config/index";
 
-export const listar = () => {
+export const Listar = () => {
   const [data, setData] = useState([]);
   const [status, setStatus] = useState({
     type: "",
     mensagem: "",
   });
 
-  const headers = {
-    "Type-Content": "json/application",
-  };
-
   useEffect(() => {
     const getUsuarios = async () => {
       await api
-        .get("/usuarios" + data, { headers })
+        .get("/usuarios" + data)
         .then((response) => {
           // console.log(response.data)
 
@@ -48,7 +47,7 @@ export const listar = () => {
         });
     };
     getUsuarios();
-  }, []);
+  }, [data]);
 
   return (
     <Container>
@@ -90,7 +89,17 @@ export const listar = () => {
                 <td>{usuario.id}</td>
                 <td>{usuario.nome}</td>
                 <td>{usuario.email}</td>
-                <td>Visualizar Editar Apagar</td>
+                <td>
+                  <Link to={"/visualizar" + usuario.id}>
+                    <ButtonPrimary>Visualizar</ButtonPrimary>
+                  </Link>{" "}
+                  <Link to={"/editar" + usuario.id}>
+                    <ButtonWarning>Editar</ButtonWarning>{" "}
+                  </Link>{" "}
+                  <Link to={"/apagar" + usuario.id}>
+                    <ButtonDanger>Apagar</ButtonDanger>
+                  </Link>
+                </td>
               </tr>
             ))}
         </tbody>
