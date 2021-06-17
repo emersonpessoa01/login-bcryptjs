@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 
 import Menu from "../../components/Menu";
 
+import {Spinner} from "reactstrap"
+
 import {
   Container,
   ConteudoTitulo,
@@ -28,6 +30,7 @@ export const Cadastrar = () => {
   });
 
   const [status, setStatus] = useState({
+    formSave:false,
     type: "",
     mensagem: "",
   });
@@ -38,6 +41,11 @@ export const Cadastrar = () => {
   const cadUsuario = async (e) => {
     e.preventDefault();
 
+    setStatus({
+    formSave:true,
+
+    })
+
     const headers = {
       "Content-Type": "application/json",
     };
@@ -47,11 +55,13 @@ export const Cadastrar = () => {
       .then((response) => {
         if (response.data.error) {
           setStatus({
+            formSave:false,
             type: "error",
             mensagem: response.data.message,
           });
         } else {
           setStatus({
+            formSave:false,
             type: "success",
             mensagem: response.data.message,
           });
@@ -59,6 +69,7 @@ export const Cadastrar = () => {
       })
       .catch(() => {
         setStatus({
+          formSave:false,
           type: "error",
           mensagem: "Erro: Tente mais tarde!",
         });
@@ -116,7 +127,15 @@ export const Cadastrar = () => {
             onChange={valorInput}
           />
 
-          <ButtonSuccess type="submit">Cadastrar</ButtonSuccess>
+            {status.formSave ? (
+            <ButtonSuccess outline type="submit" disabled size="lg">
+              Cadastrando...<Spinner color="success" size="lg" />
+            </ButtonSuccess>
+              ) : (
+            <ButtonSuccess type="submit" size="lg">
+              Cadastrar
+            </ButtonSuccess>
+            )}
         </Form>
       </Conteudo>
     </Container>

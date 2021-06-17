@@ -106,6 +106,7 @@ export const Login = () => {
             name="usuario"
             placeholder="Usuário"
             onChange={valorInput}
+            autoComplete="on"
           />
 
           <Input
@@ -116,17 +117,16 @@ export const Login = () => {
             onChange={valorInput}
           />
           {status.formSave ? (
-            <ButtomPrimary type="submit" disabled>
-              Logando...
-              <Spinner size="sm" color="success" />
+            <ButtomPrimary outline type="submit" disabled size="lg">
+              <Spinner color="light" size="sm" />
             </ButtomPrimary>
           ) : (
-            <ButtomPrimary type="submit" >
+            <ButtomPrimary type="submit" size="sm">
               Login
             </ButtomPrimary>
           )}
         </form>
-        <TituloFooter>Copyright 2021©emersonpessoa</TituloFooter>
+        <TituloFooter>Copyright 2021© emersonpessoa</TituloFooter>
       </FormLogin>
     </Container>
   );

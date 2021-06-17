@@ -33,6 +33,7 @@ export const ButtonSuccess = styled.button`
   :hover {
     background-color: #198754;
     color: #fff;
+    transition: 0.9s;
   }
 `;
 
@@ -47,6 +48,7 @@ export const ButtonPrimary = styled.button`
   :hover {
     background-color: #0d6efd;
     color: #fff;
+    transition: 0.9s;
   }
 `;
 
@@ -61,6 +63,7 @@ export const ButtonWarning = styled.button`
   :hover {
     background-color: #ffc107;
     color: #fff;
+    transition: 0.9s;
   }
 `;
 
@@ -75,6 +78,7 @@ export const ButtonDanger = styled.button`
   :hover {
     background-color: #dc3545;
     color: #fff;
+    transition: 0.9s;
   }
 `;
 
@@ -89,6 +93,7 @@ export const ButtonInfo = styled.button`
   :hover {
     background-color: #0dcaf0;
     color: #fff;
+    transition: 0.9s;
   }
 `;
 

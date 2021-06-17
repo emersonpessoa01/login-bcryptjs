@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 
 import Menu from "../../components/Menu";
 
+import { Spinner } from "reactstrap";
+
 import {
   Container,
   ConteudoTitulo,
@@ -27,12 +29,17 @@ export const Editar = (props) => {
   const [senha, setSenha] = useState("");
 
   const [status, setStatus] = useState({
+    formSave: false,
     type: "",
     mensagem: "",
   });
 
   const editUsuario = async (e) => {
     e.preventDefault();
+
+    setStatus({
+      formSave: true,
+    });
 
     const headers = {
       "Content-Type": "application/json",
@@ -43,11 +50,13 @@ export const Editar = (props) => {
       .then((response) => {
         if (response.data.error) {
           setStatus({
+            formSave: false,
             type: "error",
             mensagem: response.data.message,
           });
         } else {
           setStatus({
+            formSave: false,
             type: "success",
             mensagem: response.data.message,
           });
@@ -55,6 +64,7 @@ export const Editar = (props) => {
       })
       .catch(() => {
         setStatus({
+          formSave: false,
           type: "error",
           mensagem: "Erro: Tente mais tarde!",
         });
@@ -140,7 +150,15 @@ export const Editar = (props) => {
             onChange={(e) => setSenha(e.target.value)}
           />
 
-          <ButtonWarning type="submit">Editar</ButtonWarning>
+          {status.formSave ? (
+            <ButtonWarning outline type="submit" disabled size="lg">
+              Editando...<Spinner color="warning" size="lg" />
+            </ButtonWarning>
+          ) : (
+            <ButtonWarning type="submit" size="lg">
+              Editar
+            </ButtonWarning>
+          )}
         </Form>
       </Conteudo>
     </Container>
