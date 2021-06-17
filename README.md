@@ -1,5 +1,5 @@
 <p align="center">
-<img src= "./public/upload/anuncios/3-06-2021-21h-10_amylee-linda_2.gif" width="85" alt="icon-amy-lee" >
+<img src= "./public/upload/anuncios/3-06-2021-21h-10_amylee-linda_2.gif" width="150" alt="icon-amy-lee" >
 </p>
 <hr>
 
@@ -69,6 +69,7 @@
 *npm install --save styled-components*<br>
 
 * Instalando biblioteca Bootstrap<br>
+*cd client*<br>
 *npm i bootstrap*<br>
 *npm i reactstrap*
 
