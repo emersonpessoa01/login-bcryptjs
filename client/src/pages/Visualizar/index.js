@@ -42,7 +42,7 @@ export const Visualizar = (props) => {
         })
         .catch(() => {
           setStatus({
-            type: "erro",
+            type: "error",
             mensagem: "Erro: Tente mais tarde!",
           });
         });

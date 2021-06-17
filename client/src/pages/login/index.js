@@ -46,7 +46,7 @@ export const Login = () => {
       .then((response) => {
         if (response.data.error) {
           setStatus({
-            type: "erro",
+            type: "error",
             mensagem: response.data.message,
           });
         } else {
@@ -63,7 +63,7 @@ export const Login = () => {
       })
       .catch(() => {
         setStatus({
-          type: "erro",
+          type: "error",
           mensagem: "Erro: Usuário ou senha a senha incorreta!",
         });
       });

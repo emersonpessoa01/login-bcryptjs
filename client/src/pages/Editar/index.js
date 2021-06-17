@@ -55,7 +55,7 @@ export const Editar = (props) => {
       })
       .catch(() => {
         setStatus({
-          type: "erro",
+          type: "error",
           mensagem: "Erro: Tente mais tarde!",
         });
       });
@@ -68,7 +68,7 @@ export const Editar = (props) => {
         .then((response) => {
           if (response.data.error) {
             setStatus({
-              type: "erro",
+              type: "error",
               mensagem: response.data.message,
             });
           } else {
@@ -102,12 +102,12 @@ export const Editar = (props) => {
 
       <Conteudo>
         {status.type === "error" ? (
-          <AlertDanger>{status.message}</AlertDanger>
+          <AlertDanger>{status.mensagem}</AlertDanger>
         ) : (
           ""
         )}
         {status.type === "success" ? (
-          <AlertSuccess>{status.message}</AlertSuccess>
+          <AlertSuccess>{status.mensagem}</AlertSuccess>
         ) : (
           ""
         )}

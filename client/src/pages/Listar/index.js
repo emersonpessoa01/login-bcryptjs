@@ -20,37 +20,45 @@ import {
 } from "../../styles/custom_adm";
 
 export const Listar = () => {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState({});
   const [status, setStatus] = useState({
     type: "",
     mensagem: "",
   });
 
-  useEffect(() => {
-    const getUsuarios = async () => {
-      try {
-        const { data } = await api.get("/usuarios");
-        console.log(data.usuarios);
-        setData(data.usuarios);
-      } catch (err) {
+  const getUsuarios = async () => {
+    await api
+      .get("/usuarios")
+      .then((response) => {
+        console.log(response.data);
+        if (response.data.error) {
+          setStatus({
+            type: "error",
+            mensagem: response.data.message,
+          });
+        } else {
+          setData(response.data.usuarios);
+        }
+      })
+      .catch(() => {
         setStatus({
           type: "error",
-          mensagem: "Tente mais tarde!",
+          mensagem: "Erro: Tente mais tarde!",
         });
-      }
-    };
+      });
+  };
+
+  useEffect(() => {
     getUsuarios();
   }, []);
 
-  const apagarUsuario = async (id) => {
-    console.log("Apagar ID:" + id);
-
+  const apagarUsuario = async (idUsuario) => {
     const headers = {
-      "Type-Content": "application/json",
+      "Content-Type": "application/json",
     };
 
     await api
-      .delete("/usuario/" + id, { headers })
+      .delete("/usuario/" + idUsuario, { headers })
       .then((response) => {
         if (response.data.error) {
           setStatus({
@@ -62,9 +70,10 @@ export const Listar = () => {
             type: "success",
             mensagem: response.data.message,
           });
+          getUsuarios();
         }
       })
-      .catch((err) => {
+      .catch(() => {
         setStatus({
           type: "error",
           mensagem: "Erro: Tente mais tarde!",

@@ -1,18 +1,18 @@
 import React from "react";
-import { Router, Switch } from "react-router-dom";
-import { AuthProvider } from "./Context/AuthContext";
-import history from "./services/history";
+import { Router } from "react-router-dom";
+
 import Routes from "./routes/routesAdm";
+
+import history from "./services/history";
+
+import { AuthProvider } from "./Context/AuthContext";
 
 function App() {
   return (
     <div>
-      {/* Todas s rotas vão está dentro desse AuthProvider e todas a rotas estão recebendo o context*/}
       <AuthProvider>
         <Router history={history}>
-          <Switch>
-            <Routes />
-          </Switch>
+          <Routes />
         </Router>
       </AuthProvider>
     </div>
