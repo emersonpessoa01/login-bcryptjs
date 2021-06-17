@@ -2,17 +2,15 @@ import styled from "styled-components";
 
 export const Container = styled.section`
   display: flex;
-
   align-items: center;
   justify-content: center;
-
   height: 98vh;
   width: 100%;
 `;
 
 export const FormLogin = styled.section`
-  height: 320px;
   width: 310px;
+  height: 320px;
   margin: 20px auto;
   box-shadow: 0 0 1em #6c757d;
   padding: 20px;
@@ -53,7 +51,6 @@ export const ButtomPrimary = styled.button`
   :hover {
     background-color: #1636dd;
     color: #fff;
-    transition: 0.9s;
   }
 `;
 
@@ -61,8 +58,7 @@ export const AlertDanger = styled.p`
   background-color: #f8d7da;
   color: #842029;
   margin: 20px 0;
-  /* border: 1px solid #f5c2c7; */
-  border-left: 1px solid #842029;
+  border: 1px solid #f5c2c7;
   border-radius: 4px;
   padding: 7px;
 `;
@@ -71,8 +67,7 @@ export const AlertSuccess = styled.p`
   background-color: #d1e7dd;
   color: #0f5132;
   margin: 20px 0;
-  /* border: 1px solid #badbcc; */
-  border-left: 1px solid #0f5132;
+  border: 1px solid #badbcc;
   border-radius: 4px;
   padding: 7px;
 `;

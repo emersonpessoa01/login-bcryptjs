@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from "react";
-import Menu from "../../components/Menu";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import api from "../../config/index";
+
+import Menu from "../../components/Menu";
+
+import api from "../../config/configApi";
 
 import {
   Container,
@@ -15,7 +17,7 @@ import {
   ButtonPrimary,
   ButtonWarning,
   ButtonDanger,
-} from "../../styles/Custom_adm";
+} from "../../styles/custom_adm";
 
 export const Listar = () => {
   const [data, setData] = useState([]);
@@ -24,21 +26,45 @@ export const Listar = () => {
     mensagem: "",
   });
 
-  const getUsuarios = async () => {
+  useEffect(() => {
+    const getUsuarios = async () => {
+      try {
+        const { data } = await api.get("/usuarios");
+        console.log(data.usuarios);
+        setData(data.usuarios);
+      } catch (err) {
+        setStatus({
+          type: "error",
+          mensagem: "Tente mais tarde!",
+        });
+      }
+    };
+    getUsuarios();
+  }, []);
+
+  const apagarUsuario = async (id) => {
+    console.log("Apagar ID:" + id);
+
+    const headers = {
+      "Type-Content": "application/json",
+    };
+
     await api
-      .get("/usuarios" + data)
+      .delete("/usuario/" + id, { headers })
       .then((response) => {
-        // console.log(response.data)
         if (response.data.error) {
           setStatus({
             type: "error",
             mensagem: response.data.message,
           });
         } else {
-          setData(response.data.usuarios);
+          setStatus({
+            type: "success",
+            mensagem: response.data.message,
+          });
         }
       })
-      .catch(() => {
+      .catch((err) => {
         setStatus({
           type: "error",
           mensagem: "Erro: Tente mais tarde!",
@@ -46,23 +72,17 @@ export const Listar = () => {
       });
   };
 
-  useEffect(() => {
-    getUsuarios();
-  }, [data]);
-
   return (
     <Container>
       <Menu />
       <ConteudoTitulo>
-        <Titulo>Listar usuários</Titulo>
+        <Titulo>Listar Usuários</Titulo>
         <BotaoAcao>
           <Link to="/cadastrar">
             <ButtonSuccess>Cadastrar</ButtonSuccess>
           </Link>
         </BotaoAcao>
       </ConteudoTitulo>
-
-      <hr />
       {status.type === "error" ? (
         <AlertDanger>{status.mensagem}</AlertDanger>
       ) : (
@@ -73,13 +93,12 @@ export const Listar = () => {
       ) : (
         ""
       )}
-
       <Table>
         <thead>
           <tr>
             <th>ID</th>
             <th>Nome</th>
-            <th>Email</th>
+            <th>E-mail</th>
             <th>Ações</th>
           </tr>
         </thead>
@@ -91,14 +110,16 @@ export const Listar = () => {
                 <td>{usuario.nome}</td>
                 <td>{usuario.email}</td>
                 <td>
-                  <Link to={"/visualizar" + usuario.id}>
+                  <Link to={"/visualizar/" + usuario.id}>
                     <ButtonPrimary>Visualizar</ButtonPrimary>
                   </Link>{" "}
-                  <Link to={"/editar" + usuario.id}>
-                     <ButtonWarning>Editar</ButtonWarning>{" "}
+                  <Link to={"/editar/" + usuario.id}>
+                    <ButtonWarning>Editar</ButtonWarning>
                   </Link>{" "}
-                  <Link to={"/apagar" + usuario.id}>
-                    <ButtonDanger>Apagar</ButtonDanger>
+                  <Link to={"#"}>
+                    <ButtonDanger onClick={() => apagarUsuario(usuario.id)}>
+                      Apagar
+                    </ButtonDanger>
                   </Link>
                 </td>
               </tr>

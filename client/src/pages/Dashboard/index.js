@@ -1,6 +1,7 @@
 import React from "react";
-import { Container, ConteudoTitulo, Titulo } from "../../styles/Custom_adm";
+
 import Menu from "../../components/Menu";
+import { Container, ConteudoTitulo, Titulo } from "../../styles/custom_adm";
 
 export const Dashboard = () => {
   return (

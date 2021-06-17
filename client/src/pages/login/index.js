@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
-import api from "../../config/index";
-import { Context } from "../../Context/AuthContext";
+
 import { useHistory } from "react-router-dom";
+
 import {
   Container,
   FormLogin,
@@ -9,15 +9,19 @@ import {
   Input,
   ButtomPrimary,
   AlertDanger,
-  AlertSuccess
+  AlertSuccess,
 } from "./styles";
+
+import { Context } from "../../Context/AuthContext";
+
+import api from "../../config/configApi";
 
 export const Login = () => {
   const history = useHistory();
-  const { authenticated, signIn } = useContext(Context);
-  console.log("Situação: " + authenticated);
 
-  const [dadosUsuario, setDadosUsuario] = useState({
+  const { signIn } = useContext(Context);
+
+  const [dadosUsuario, setUsuario] = useState({
     usuario: "",
     senha: "",
   });
@@ -27,18 +31,11 @@ export const Login = () => {
     mensagem: "",
   });
 
-  const valorInput = (e) => {
-    const { name, value } = e.target;
-    setDadosUsuario({
-      ...dadosUsuario,
-      [name]: value,
-    });
-  };
+  const valorInput = (e) =>
+    setUsuario({ ...dadosUsuario, [e.target.name]: e.target.value });
 
-  const loginSubmit = (e) => {
+  const loginSubmit = async (e) => {
     e.preventDefault();
-    // console.log(dadosUsuario.usuario);
-    // console.log(dadosUsuario.senha);
 
     const headers = {
       "Content-Type": "application/json",
@@ -47,12 +44,9 @@ export const Login = () => {
     api
       .post("/login", dadosUsuario, { headers })
       .then((response) => {
-        // console.log(response.data.error);
-        // console.log(response.data.message);
-        // console.log(response.data.token);
         if (response.data.error) {
           setStatus({
-            type: "error",
+            type: "erro",
             mensagem: response.data.message,
           });
         } else {
@@ -60,19 +54,17 @@ export const Login = () => {
             type: "success",
             mensagem: response.data.message,
           });
-          //Salvar o token no localStorage
+          // Salvar o token localStorage
           localStorage.setItem("token", JSON.stringify(response.data.token));
           api.defaults.headers.Authorization = `Bearer ${response.data.token}`;
           signIn(true);
-          setTimeout(() => {
-            return history.push("/dashboard");
-          }, 3500);
+          return history.push("/dashboard");
         }
       })
       .catch(() => {
         setStatus({
-          type: "error",
-          mensagem: "Erro: Tente mais tarde!",
+          type: "erro",
+          mensagem: "Erro: Usuário ou senha a senha incorreta!",
         });
       });
   };
@@ -80,24 +72,36 @@ export const Login = () => {
   return (
     <Container>
       <FormLogin>
+        {/* Titulo da página */}
         <Titulo>Login</Titulo>
-        {status.type === "error" ? <AlertDanger>{status.mensagem}</AlertDanger> : ""}
-        {status.type === "success" ? <AlertSuccess>{status.mensagem}</AlertSuccess> : ""}
+
+        {status.type === "error" ? (
+          <AlertDanger>{status.mensagem}</AlertDanger>
+        ) : (
+          ""
+        )}
+        {status.type === "success" ? (
+          <AlertSuccess>{status.mensagem}</AlertSuccess>
+        ) : (
+          ""
+        )}
+
         <form onSubmit={loginSubmit}>
           <Input
-            autoFocus
             type="text"
             name="usuario"
             placeholder="Usuário"
             onChange={valorInput}
           />
+
           <Input
             type="password"
             name="senha"
             placeholder="Senha"
-            autoComplete="on" //para eliminar o alerta
+            autoComplete="on"
             onChange={valorInput}
           />
+
           <ButtomPrimary type="submit">Acessar</ButtomPrimary>
         </form>
       </FormLogin>

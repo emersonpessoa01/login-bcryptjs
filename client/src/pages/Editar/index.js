@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import Menu from "../../components/Menu";
@@ -15,27 +15,23 @@ import {
   Form,
   Label,
   Input,
-  ButtonSuccess,
+  ButtonWarning,
 } from "../../styles/custom_adm";
 
 import api from "../../config/configApi";
 
-export const Cadastrar = () => {
-  const [usuario, setUsuario] = useState({
-    nome: "",
-    email: "",
-    senha: "",
-  });
+export const Editar = (props) => {
+  const [id] = useState(props.match.params.id);
+  const [nome, setNome] = useState("");
+  const [email, setEmail] = useState("");
+  const [senha, setSenha] = useState("");
 
   const [status, setStatus] = useState({
     type: "",
     mensagem: "",
   });
 
-  const valorInput = (e) =>
-    setUsuario({ ...usuario, [e.target.name]: e.target.value });
-
-  const cadUsuario = async (e) => {
+  const editUsuario = async (e) => {
     e.preventDefault();
 
     const headers = {
@@ -43,7 +39,7 @@ export const Cadastrar = () => {
     };
 
     await api
-      .post("/usuario", usuario, { headers })
+      .put("/usuario", { id, nome, email, senha }, { headers })
       .then((response) => {
         if (response.data.error) {
           setStatus({
@@ -59,18 +55,44 @@ export const Cadastrar = () => {
       })
       .catch(() => {
         setStatus({
-          type: "error",
+          type: "erro",
           mensagem: "Erro: Tente mais tarde!",
         });
       });
   };
+
+  useEffect(() => {
+    const getUsuario = async () => {
+      await api
+        .get("/usuario/" + id)
+        .then((response) => {
+          if (response.data.error) {
+            setStatus({
+              type: "erro",
+              mensagem: response.data.message,
+            });
+          } else {
+            setNome(response.data.usuario.nome);
+            setEmail(response.data.usuario.email);
+          }
+        })
+        .catch(() => {
+          setStatus({
+            type: "error",
+            mensagem: "Erro: Tente mais tarde!",
+          });
+        });
+    };
+
+    getUsuario();
+  }, [id]);
 
   return (
     <Container>
       <Menu />
 
       <ConteudoTitulo>
-        <Titulo>Cadastrar Usuário</Titulo>
+        <Titulo>Editar Usuário</Titulo>
         <BotaoAcao>
           <Link to="/listar">
             <ButtonInfo>Listar</ButtonInfo>
@@ -80,23 +102,24 @@ export const Cadastrar = () => {
 
       <Conteudo>
         {status.type === "error" ? (
-          <AlertDanger>{status.mensagem}</AlertDanger>
+          <AlertDanger>{status.message}</AlertDanger>
         ) : (
           ""
         )}
         {status.type === "success" ? (
-          <AlertSuccess>{status.mensagem}</AlertSuccess>
+          <AlertSuccess>{status.message}</AlertSuccess>
         ) : (
           ""
         )}
 
-        <Form onSubmit={cadUsuario}>
+        <Form onSubmit={editUsuario}>
           <Label>Nome: </Label>
           <Input
             type="text"
             name="nome"
             placeholder="Nome do usuário"
-            onChange={valorInput}
+            value={nome}
+            onChange={(e) => setNome(e.target.value)}
           />
 
           <Label>E-mail: </Label>
@@ -104,7 +127,8 @@ export const Cadastrar = () => {
             type="email"
             name="email"
             placeholder="E-mail do usuário"
-            onChange={valorInput}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
 
           <Label>Senha: </Label>
@@ -113,10 +137,10 @@ export const Cadastrar = () => {
             name="senha"
             placeholder="Senha para acessar o administrativo"
             autoComplete="on"
-            onChange={valorInput}
+            onChange={(e) => setSenha(e.target.value)}
           />
 
-          <ButtonSuccess type="submit">Cadastrar</ButtonSuccess>
+          <ButtonWarning type="submit">Editar</ButtonWarning>
         </Form>
       </Conteudo>
     </Container>

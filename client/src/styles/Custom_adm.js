@@ -1,4 +1,3 @@
-//Criar um css global
 import styled from "styled-components";
 
 export const Container = styled.section`
@@ -34,7 +33,6 @@ export const ButtonSuccess = styled.button`
   :hover {
     background-color: #198754;
     color: #fff;
-    transition: 0.9s;
   }
 `;
 
@@ -49,7 +47,6 @@ export const ButtonPrimary = styled.button`
   :hover {
     background-color: #0d6efd;
     color: #fff;
-    transition: 0.9s;
   }
 `;
 
@@ -64,7 +61,6 @@ export const ButtonWarning = styled.button`
   :hover {
     background-color: #ffc107;
     color: #fff;
-    transition: 0.9s;
   }
 `;
 
@@ -79,7 +75,6 @@ export const ButtonDanger = styled.button`
   :hover {
     background-color: #dc3545;
     color: #fff;
-    transition: 0.9s;
   }
 `;
 
@@ -94,7 +89,6 @@ export const ButtonInfo = styled.button`
   :hover {
     background-color: #0dcaf0;
     color: #fff;
-    transition: 0.9s;
   }
 `;
 
@@ -117,7 +111,6 @@ export const AlertDanger = styled.p`
   color: #842029;
   margin: 20px 0;
   border: 1px solid #f5c2c7;
-  border-left: 1px solid #842029;
   border-radius: 4px;
   padding: 7px;
 `;
@@ -127,13 +120,12 @@ export const AlertSuccess = styled.p`
   color: #0f5132;
   margin: 20px 0;
   border: 1px solid #badbcc;
-  border-left: 1px solid #0f5132;
   border-radius: 4px;
   padding: 7px;
 `;
 
 export const Conteudo = styled.section`
-  padding: 16px;
+  padding: 15px;
 `;
 
 export const Form = styled.form`
@@ -155,6 +147,5 @@ export const Input = styled.input`
   box-sizing: border-box;
   margin-top: 6px;
   margin-bottom: 16px;
-  resize: vertical;
-  
+  risize: vertical;
 `;

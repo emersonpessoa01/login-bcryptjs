@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import Menu from "../../components/Menu";
 import { Link } from "react-router-dom";
-import api from "../../config/index";
-import { ConteudoUsuario } from "./styles";
+
+import Menu from "../../components/Menu";
+
 import {
   Container,
   ConteudoTitulo,
@@ -12,39 +12,42 @@ import {
   AlertSuccess,
   ButtonInfo,
   Conteudo,
-} from "../../styles/Custom_adm";
+} from "../../styles/custom_adm";
+import { ConteudoUsuario } from "./styles";
+
+import api from "../../config/configApi";
 
 export const Visualizar = (props) => {
-  const [id] = useState(props.match.params.id);
-  // console.log(id)
   const [data, setData] = useState([]);
+  const [id] = useState(props.match.params.id);
+
   const [status, setStatus] = useState({
     type: "",
     mensagem: "",
   });
 
-  const getUsuario = async () => {
-    await api
-      .get("/usuario" + id)
-      .then((response) => {
-        if (response.data.error) {
-          setStatus({
-            type: "error",
-            mensagem: response.data.message,
-          });
-        } else {
-          setData(response.data.usuario);
-        }
-      })
-      .catch(() => {
-        setStatus({
-          type: "error",
-          mensagem: "Erro: Tente mais tarde!",
-        });
-      });
-  };
-
   useEffect(() => {
+    const getUsuario = async () => {
+      await api
+        .get("/usuario/" + id)
+        .then((response) => {
+          if (response.data.error) {
+            setStatus({
+              type: "error",
+              mensagem: response.data.message,
+            });
+          } else {
+            setData(response.data.usuario);
+          }
+        })
+        .catch(() => {
+          setStatus({
+            type: "erro",
+            mensagem: "Erro: Tente mais tarde!",
+          });
+        });
+    };
+
     getUsuario();
   }, [id]);
 
@@ -53,7 +56,7 @@ export const Visualizar = (props) => {
       <Menu />
 
       <ConteudoTitulo>
-        <Titulo>Visualizar usuários</Titulo>
+        <Titulo>Visualizar Usuário</Titulo>
         <BotaoAcao>
           <Link to="/listar">
             <ButtonInfo>Listar</ButtonInfo>
@@ -62,7 +65,6 @@ export const Visualizar = (props) => {
       </ConteudoTitulo>
 
       <Conteudo>
-        <hr />
         {status.type === "error" ? (
           <AlertDanger>{status.mensagem}</AlertDanger>
         ) : (
@@ -73,9 +75,10 @@ export const Visualizar = (props) => {
         ) : (
           ""
         )}
+
         <ConteudoUsuario>ID: {data.id}</ConteudoUsuario>
         <ConteudoUsuario>Nome: {data.nome}</ConteudoUsuario>
-        <ConteudoUsuario>Email: {data.email}</ConteudoUsuario>
+        <ConteudoUsuario>E-mail: {data.email}</ConteudoUsuario>
       </Conteudo>
     </Container>
   );

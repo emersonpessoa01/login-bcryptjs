@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
-import { NavList } from "./styles";
 import { NavLink } from "react-router-dom";
+
+import { NavList } from "./styles";
+
 import { Context } from "../../Context/AuthContext";
 
 const Menu = () => {
@@ -16,7 +18,6 @@ const Menu = () => {
           <li>Usuários</li>
         </NavLink>
 
-        {/* Para destruir o token após sair */}
         <NavLink to="#" exact>
           <li onClick={handleLogout}>Sair</li>
         </NavLink>
@@ -26,4 +27,3 @@ const Menu = () => {
 };
 
 export default Menu;
-//assim pode exportar qualquer outro local
