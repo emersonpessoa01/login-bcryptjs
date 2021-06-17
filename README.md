@@ -1,5 +1,5 @@
 <p align="center">
-<img src= "./public/upload/anuncios/3-06-2021-21h-10_amylee-linda_2" width="85" alt="icon-anchor" >
+<img src= "./public/upload/anuncios/3-06-2021-21h-10_amylee-linda_2.gif" width="85" alt="icon-amy-lee" >
 </p>
 <hr>
 
@@ -67,5 +67,12 @@
 *npm install --save history@4.9.0*<br>
 * Transformar o ccs em componentes<br>
 *npm install --save styled-components*<br>
+
+* Instalando biblioteca Bootstrap<br>
+*npm i bootstrap*<br>
+*npm i reactstrap*
+
+* Importando no index.js<br>
+*import "bootstrap/dist/css/bootstrap.css"*
 
 

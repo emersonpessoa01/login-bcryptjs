@@ -2,6 +2,8 @@ import React, { useState, useContext } from "react";
 
 import { useHistory } from "react-router-dom";
 
+import { Spinner } from "reactstrap";
+
 import {
   Container,
   FormLogin,
@@ -10,6 +12,7 @@ import {
   ButtomPrimary,
   AlertDanger,
   AlertSuccess,
+  TituloFooter,
 } from "./styles";
 
 import { Context } from "../../Context/AuthContext";
@@ -27,6 +30,7 @@ export const Login = () => {
   });
 
   const [status, setStatus] = useState({
+    formSave: false,
     type: "",
     mensagem: "",
   });
@@ -37,6 +41,10 @@ export const Login = () => {
   const loginSubmit = async (e) => {
     e.preventDefault();
 
+    setStatus({
+      formSave: true,
+    });
+
     const headers = {
       "Content-Type": "application/json",
     };
@@ -46,11 +54,13 @@ export const Login = () => {
       .then((response) => {
         if (response.data.error) {
           setStatus({
+            formSave: false,
             type: "error",
             mensagem: response.data.message,
           });
         } else {
           setStatus({
+            formSave: false,
             type: "success",
             mensagem: response.data.message,
           });
@@ -58,11 +68,14 @@ export const Login = () => {
           localStorage.setItem("token", JSON.stringify(response.data.token));
           api.defaults.headers.Authorization = `Bearer ${response.data.token}`;
           signIn(true);
-          return history.push("/dashboard");
+          setTimeout(() => {
+            return history.push("/dashboard");
+          }, 3500);
         }
       })
       .catch(() => {
         setStatus({
+          formSave: false,
           type: "error",
           mensagem: "Erro: Usuário ou senha a senha incorreta!",
         });
@@ -88,6 +101,7 @@ export const Login = () => {
 
         <form onSubmit={loginSubmit}>
           <Input
+            autoFocus
             type="text"
             name="usuario"
             placeholder="Usuário"
@@ -101,9 +115,18 @@ export const Login = () => {
             autoComplete="on"
             onChange={valorInput}
           />
-
-          <ButtomPrimary type="submit">Acessar</ButtomPrimary>
+          {status.formSave ? (
+            <ButtomPrimary type="submit" disabled>
+              Logando...
+              <Spinner size="sm" color="success" />
+            </ButtomPrimary>
+          ) : (
+            <ButtomPrimary type="submit" >
+              Login
+            </ButtomPrimary>
+          )}
         </form>
+        <TituloFooter>Copyright 2021©emersonpessoa</TituloFooter>
       </FormLogin>
     </Container>
   );

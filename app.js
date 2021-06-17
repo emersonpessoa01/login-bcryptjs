@@ -73,6 +73,14 @@ app.get("/usuario/:id", eAdmin, async (req, res) => {
 
 //Editar usuário
 app.put("/usuario", eAdmin, async (req, res) => {
+  await sleep(3000);
+
+  function sleep(ms) {
+    return new Promise((resolve) => {
+      setTimeout(resolve, ms);
+    });
+  }
+
   let dados = req.body;
   dados.senha = await bcrypt.hash(dados.senha, 8);
 
@@ -122,8 +130,16 @@ app.delete("/usuario/:id", eAdmin, async (req, res) => {
     });
 });
 
-//Cadastrar usuários
+//Logar usuários
 app.post("/login", async (req, res) => {
+  await sleep(3000);
+
+  function sleep(ms) {
+    return new Promise((resolve) => {
+      setTimeout(resolve, ms);
+    });
+  }
+
   const usuario = await Usuario.findOne({
     where: {
       email: req.body.usuario,
@@ -158,6 +174,14 @@ app.post("/login", async (req, res) => {
 
 //Cadastrar usuário um por vez
 app.post("/usuario", async (req, res) => {
+  await sleep(3000);
+
+  function sleep(ms) {
+    return new Promise((resolve) => {
+      setTimeout(resolve, ms);
+    });
+  }
+
   let dados = req.body;
   dados.senha = await bcrypt.hash(dados.senha, 8);
 
@@ -176,11 +200,11 @@ app.post("/usuario", async (req, res) => {
     });
 });
 
-app.get("/",(req, res)=>{
+app.get("/", (req, res) => {
   res.json({
-    mensagem:"Olá, Emerson Pessoa"
-  })
-})
+    mensagem: "Olá, Emerson Pessoa",
+  });
+});
 
 const APP_PORT = process.env.PORT || 8080;
 app.listen(APP_PORT, () => {
