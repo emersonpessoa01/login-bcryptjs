@@ -96,7 +96,7 @@ export const Visualizar = (props) => {
           </thead>
 
           <tbody>
-            <tr>
+            <tr className="text-center">
               <td>{data.id}</td>
               <td>{data.nome}</td>
               <td>{data.email}</td>
