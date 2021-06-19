@@ -105,17 +105,17 @@ export const Listar = () => {
       )}
       <Table>
         <thead>
-          <Tr>
+          <tr>
             <th style={{borderTopLeftRadius: "10px"}}>ID</th>
             <th>Nome</th>
             <th>E-mail</th>
             <th style={{borderTopRightRadius: "10px"}}>Ações</th>
-          </Tr>
+          </tr>
         </thead>
         <tbody>
           {Array.isArray(data) &&
             data.map((usuario) => (
-              <Tr key={usuario.id}>
+              <tr key={usuario.id}>
                 <td>{usuario.id}</td>
                 <td>{usuario.nome}</td>
                 <td>{usuario.email}</td>
@@ -132,7 +132,7 @@ export const Listar = () => {
                     </ButtonDanger>
                   </Link>
                 </td>
-              </Tr>
+              </tr>
             ))}
         </tbody>
       </Table>

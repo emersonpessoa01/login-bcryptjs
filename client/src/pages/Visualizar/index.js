@@ -12,8 +12,10 @@ import {
   AlertSuccess,
   ButtonInfo,
   Conteudo,
+  Table,
+  ButtonPrimary,
 } from "../../styles/custom_adm";
-import { ConteudoUsuario } from "./styles";
+// import { ConteudoUsuario } from "./styles";
 
 import api from "../../config/configApi";
 
@@ -60,6 +62,9 @@ export const Visualizar = (props) => {
         <BotaoAcao>
           <Link to="/listar">
             <ButtonInfo>Listar</ButtonInfo>
+          </Link>{" "}
+          <Link to={"/editar/" + id}>
+            <ButtonPrimary>Editar</ButtonPrimary>
           </Link>
         </BotaoAcao>
       </ConteudoTitulo>
@@ -76,9 +81,25 @@ export const Visualizar = (props) => {
           ""
         )}
 
-        <ConteudoUsuario>ID: {data.id}</ConteudoUsuario>
-        <ConteudoUsuario>Nome: {data.nome}</ConteudoUsuario>
-        <ConteudoUsuario>E-mail: {data.email}</ConteudoUsuario>
+        <Table striped hover>
+          <thead>
+            <tr>
+              <th style={{borderTopLeftRadius: "10px"}}>ID</th>
+              <th>Nome</th>
+              <th>Usuário</th>
+              <th style={{borderTopRightRadius: "10px"}}>Senha(Criptografada)</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <td>{data.id}</td>
+              <td>{data.nome}</td>
+              <td>{data.email}</td>
+              <td>{data.senha}</td>
+            </tr>
+          </tbody>
+        </Table>
       </Conteudo>
     </Container>
   );

@@ -143,10 +143,6 @@ export const Form = styled.form`
   margin: 0px auto;
 `;
 
-export const Tr = styled.tr`
-  border-top-left-radius: 10px;
-`;
-
 export const Label = styled.label`
   width: 100%;
   padding: 12px;

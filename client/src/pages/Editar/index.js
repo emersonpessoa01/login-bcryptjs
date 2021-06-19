@@ -18,6 +18,7 @@ import {
   Label,
   Input,
   ButtonWarning,
+  ButtonPrimary,
 } from "../../styles/custom_adm";
 
 import api from "../../config/configApi";
@@ -100,13 +101,15 @@ export const Editar = (props) => {
   return (
     <Container>
       <Menu />
-
       <ConteudoTitulo>
         <Titulo>Editar Usuário</Titulo>
         <BotaoAcao>
           <Link to="/listar">
-            <ButtonInfo>Listar</ButtonInfo>
-          </Link>
+            <ButtonPrimary>Listar</ButtonPrimary>
+          </Link>{" "}
+          <Link to={"/visualizar/" + id}>
+            <ButtonInfo>Visualizar</ButtonInfo>
+          </Link>{" "}
         </BotaoAcao>
       </ConteudoTitulo>
 
@@ -125,6 +128,7 @@ export const Editar = (props) => {
         <Form onSubmit={editUsuario}>
           <Label>Nome: </Label>
           <Input
+            autoFocus
             type="text"
             name="nome"
             placeholder="Nome do usuário"
@@ -152,7 +156,8 @@ export const Editar = (props) => {
 
           {status.formSave ? (
             <ButtonWarning outline type="submit" disabled size="lg">
-              Editando...<Spinner color="warning" size="lg" />
+              Editando...
+              <Spinner color="warning" size="lg" />
             </ButtonWarning>
           ) : (
             <ButtonWarning type="submit" size="lg">
