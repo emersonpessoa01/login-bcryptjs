@@ -155,12 +155,12 @@ export const Editar = (props) => {
           />
 
           {status.formSave ? (
-            <ButtonWarning outline type="submit" disabled size="lg">
+            <ButtonWarning outline type="submit" disabled size="sm">
               Editando...
-              <Spinner color="warning" size="lg" />
+              <Spinner color="warning" size="sm" />
             </ButtonWarning>
           ) : (
-            <ButtonWarning type="submit" size="lg">
+            <ButtonWarning type="submit" size="sm">
               Editar
             </ButtonWarning>
           )}

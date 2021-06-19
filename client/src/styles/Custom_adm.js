@@ -145,14 +145,15 @@ export const Form = styled.form`
 
 export const Label = styled.label`
   width: 100%;
-  padding: 12px;
+  /* padding: 12px; */
   margin-top: 6px;
   margin-bottom: 16px;
 `;
 
 export const Input = styled.input`
   width: 100%;
-  padding: 12px;
+  /* padding: 12px; */
+  padding: 5px;
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;

@@ -69,7 +69,9 @@ export const Visualizar = (props) => {
         </BotaoAcao>
       </ConteudoTitulo>
 
+
       <Conteudo>
+      <hr m-1 />
         {status.type === "error" ? (
           <AlertDanger>{status.mensagem}</AlertDanger>
         ) : (
@@ -83,11 +85,13 @@ export const Visualizar = (props) => {
 
         <Table striped hover>
           <thead>
-            <tr>
-              <th style={{borderTopLeftRadius: "10px"}}>ID</th>
+            <tr className="text-center">
+              <th style={{ borderTopLeftRadius: "10px" }}>ID</th>
               <th>Nome</th>
               <th>Usuário</th>
-              <th style={{borderTopRightRadius: "10px"}}>Senha(Criptografada)</th>
+              <th style={{ borderTopRightRadius: "10px" }}>
+                Senha(Criptografada)
+              </th>
             </tr>
           </thead>
 

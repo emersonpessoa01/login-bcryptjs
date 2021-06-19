@@ -17,7 +17,7 @@ import {
   ButtonPrimary,
   ButtonWarning,
   ButtonDanger,
-  Tr,
+  Conteudo,
 } from "../../styles/custom_adm";
 
 export const Listar = () => {
@@ -93,49 +93,53 @@ export const Listar = () => {
           </Link>
         </BotaoAcao>
       </ConteudoTitulo>
-      {status.type === "error" ? (
-        <AlertDanger>{status.mensagem}</AlertDanger>
-      ) : (
-        ""
-      )}
-      {status.type === "success" ? (
-        <AlertSuccess>{status.mensagem}</AlertSuccess>
-      ) : (
-        ""
-      )}
-      <Table>
-        <thead>
-          <tr>
-            <th style={{borderTopLeftRadius: "10px"}}>ID</th>
-            <th>Nome</th>
-            <th>E-mail</th>
-            <th style={{borderTopRightRadius: "10px"}}>Ações</th>
-          </tr>
-        </thead>
-        <tbody>
-          {Array.isArray(data) &&
-            data.map((usuario) => (
-              <tr key={usuario.id}>
-                <td>{usuario.id}</td>
-                <td>{usuario.nome}</td>
-                <td>{usuario.email}</td>
-                <td>
-                  <Link to={"/visualizar/" + usuario.id}>
-                    <ButtonPrimary>Visualizar</ButtonPrimary>
-                  </Link>{" "}
-                  <Link to={"/editar/" + usuario.id}>
-                    <ButtonWarning>Editar</ButtonWarning>
-                  </Link>{" "}
-                  <Link to={"#"}>
-                    <ButtonDanger onClick={() => apagarUsuario(usuario.id)}>
-                      Apagar
-                    </ButtonDanger>
-                  </Link>
-                </td>
-              </tr>
-            ))}
-        </tbody>
-      </Table>
+      
+      <Conteudo>
+      <hr m-1 />
+        {status.type === "error" ? (
+          <AlertDanger>{status.mensagem}</AlertDanger>
+        ) : (
+          ""
+        )}
+        {status.type === "success" ? (
+          <AlertSuccess>{status.mensagem}</AlertSuccess>
+        ) : (
+          ""
+        )}
+        <Table>
+          <thead>
+            <tr className="text-center">
+              <th style={{ borderTopLeftRadius: "10px" }}>ID</th>
+              <th>Nome</th>
+              <th>E-mail</th>
+              <th style={{ borderTopRightRadius: "10px" }}>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            {Array.isArray(data) &&
+              data.map((usuario) => (
+                <tr className="text-center" key={usuario.id}>
+                  <td>{usuario.id}</td>
+                  <td>{usuario.nome}</td>
+                  <td>{usuario.email}</td>
+                  <td>
+                    <Link to={"/visualizar/" + usuario.id}>
+                      <ButtonPrimary>Visualizar</ButtonPrimary>
+                    </Link>{" "}
+                    <Link to={"/editar/" + usuario.id}>
+                      <ButtonWarning>Editar</ButtonWarning>
+                    </Link>{" "}
+                    <Link to={"#"}>
+                      <ButtonDanger onClick={() => apagarUsuario(usuario.id)}>
+                        Apagar
+                      </ButtonDanger>
+                    </Link>
+                  </td>
+                </tr>
+              ))}
+          </tbody>
+        </Table>
+      </Conteudo>
     </Container>
   );
 };
