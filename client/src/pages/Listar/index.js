@@ -17,6 +17,7 @@ import {
   ButtonPrimary,
   ButtonWarning,
   ButtonDanger,
+  Tr,
 } from "../../styles/custom_adm";
 
 export const Listar = () => {
@@ -104,17 +105,17 @@ export const Listar = () => {
       )}
       <Table>
         <thead>
-          <tr>
-            <th>ID</th>
+          <Tr>
+            <th style={{borderTopLeftRadius: "10px"}}>ID</th>
             <th>Nome</th>
             <th>E-mail</th>
-            <th>Ações</th>
-          </tr>
+            <th style={{borderTopRightRadius: "10px"}}>Ações</th>
+          </Tr>
         </thead>
         <tbody>
           {Array.isArray(data) &&
             data.map((usuario) => (
-              <tr key={usuario.id}>
+              <Tr key={usuario.id}>
                 <td>{usuario.id}</td>
                 <td>{usuario.nome}</td>
                 <td>{usuario.email}</td>
@@ -131,7 +132,7 @@ export const Listar = () => {
                     </ButtonDanger>
                   </Link>
                 </td>
-              </tr>
+              </Tr>
             ))}
         </tbody>
       </Table>
