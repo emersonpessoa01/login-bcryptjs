@@ -49,7 +49,8 @@
 * Multer é um middleware node.js para manipulação multipart/form-data, usado para o upload de arquivos<br>
 *npm install --save multer*
 
-=====================================================================
+<hr>
+
 #### Sequência para criar o projeto frontend
 * Criar projeto react<br>
 *npm init react-app <nome_app>*<br>
