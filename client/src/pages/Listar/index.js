@@ -5,6 +5,8 @@ import Menu from "../../components/Menu";
 
 import api from "../../config/configApi";
 
+import Preloader1 from "../../components/Preloader/Preloader1";
+
 import {
   Container,
   ConteudoTitulo,
@@ -27,6 +29,9 @@ export const Listar = () => {
     mensagem: "",
   });
 
+  const [completed, setCompleted] = useState(false);
+
+
   const getUsuarios = async () => {
     await api
       .get("/usuarios")
@@ -39,6 +44,10 @@ export const Listar = () => {
           });
         } else {
           setData(response.data.usuarios);
+
+          setTimeout(() => {
+            setCompleted(true);
+          },3500);
         }
       })
       .catch(() => {
@@ -93,9 +102,9 @@ export const Listar = () => {
           </Link>
         </BotaoAcao>
       </ConteudoTitulo>
-      
+
       <Conteudo>
-      <hr m-1 />
+        <hr m-1 />
         {status.type === "error" ? (
           <AlertDanger>{status.mensagem}</AlertDanger>
         ) : (
@@ -106,39 +115,44 @@ export const Listar = () => {
         ) : (
           ""
         )}
-        <Table>
-          <thead>
-            <tr className="text-center">
-              <th style={{ borderTopLeftRadius: "10px" }}>ID</th>
-              <th>Nome</th>
-              <th>E-mail</th>
-              <th style={{ borderTopRightRadius: "10px" }}>Ações</th>
-            </tr>
-          </thead>
-          <tbody>
-            {Array.isArray(data) &&
-              data.map((usuario) => (
-                <tr className="text-center" key={usuario.id}>
-                  <td>{usuario.id}</td>
-                  <td>{usuario.nome}</td>
-                  <td>{usuario.email}</td>
-                  <td>
-                    <Link to={"/visualizar/" + usuario.id}>
-                      <ButtonPrimary>Visualizar</ButtonPrimary>
-                    </Link>{" "}
-                    <Link to={"/editar/" + usuario.id}>
-                      <ButtonWarning>Editar</ButtonWarning>
-                    </Link>{" "}
-                    <Link to={"#"}>
-                      <ButtonDanger onClick={() => apagarUsuario(usuario.id)}>
-                        Apagar
-                      </ButtonDanger>
-                    </Link>
-                  </td>
-                </tr>
-              ))}
-          </tbody>
-        </Table>
+
+        {!completed ? (
+          <Preloader1 />
+        ) : (
+          <Table>
+            <thead>
+              <tr className="text-center">
+                <th style={{ borderTopLeftRadius: "10px" }}>ID</th>
+                <th>Nome</th>
+                <th>E-mail</th>
+                <th style={{ borderTopRightRadius: "10px" }}>Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              {Array.isArray(data) &&
+                data.map((usuario) => (
+                  <tr className="text-center" key={usuario.id}>
+                    <td>{usuario.id}</td>
+                    <td>{usuario.nome}</td>
+                    <td>{usuario.email}</td>
+                    <td>
+                      <Link to={"/visualizar/" + usuario.id}>
+                        <ButtonPrimary>Visualizar</ButtonPrimary>
+                      </Link>{" "}
+                      <Link to={"/editar/" + usuario.id}>
+                        <ButtonWarning>Editar</ButtonWarning>
+                      </Link>{" "}
+                      <Link to={"#"}>
+                        <ButtonDanger onClick={() => apagarUsuario(usuario.id)}>
+                          Apagar
+                        </ButtonDanger>
+                      </Link>
+                    </td>
+                  </tr>
+                ))}
+            </tbody>
+          </Table>
+        )}
       </Conteudo>
     </Container>
   );

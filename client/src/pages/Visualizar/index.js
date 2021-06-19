@@ -29,28 +29,29 @@ export const Visualizar = (props) => {
   });
 
   useEffect(() => {
-    const getUsuario = async () => {
-      await api
-        .get("/usuario/" + id)
-        .then((response) => {
-          if (response.data.error) {
+    setTimeout(() => {
+      const getUsuario = async () => {
+        await api
+          .get("/usuario/" + id)
+          .then((response) => {
+            if (response.data.error) {
+              setStatus({
+                type: "error",
+                mensagem: response.data.message,
+              });
+            } else {
+              setData(response.data.usuario);
+            }
+          })
+          .catch(() => {
             setStatus({
               type: "error",
-              mensagem: response.data.message,
+              mensagem: "Erro: Tente mais tarde!",
             });
-          } else {
-            setData(response.data.usuario);
-          }
-        })
-        .catch(() => {
-          setStatus({
-            type: "error",
-            mensagem: "Erro: Tente mais tarde!",
           });
-        });
-    };
-
-    getUsuario();
+      };
+      getUsuario();
+    }, 2000);
   }, [id]);
 
   return (
@@ -69,9 +70,8 @@ export const Visualizar = (props) => {
         </BotaoAcao>
       </ConteudoTitulo>
 
-
       <Conteudo>
-      <hr m-1 />
+        <hr m-1 />
         {status.type === "error" ? (
           <AlertDanger>{status.mensagem}</AlertDanger>
         ) : (
