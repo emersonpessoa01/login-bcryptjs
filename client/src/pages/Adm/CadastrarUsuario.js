@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 
-import { Link, useHistory } from "react-router-dom";
+import {  useHistory } from "react-router-dom";
 
 import { Spinner } from "reactstrap";
 
@@ -15,17 +15,18 @@ import {
   TituloFooter,
 } from "./styles";
 
-import { Context } from "../../Context/AuthContext";
+// import { Context } from "../../Context/AuthContext";
 
 import api from "../../config/configApi";
 
-export const Login = () => {
+export const CadastrarUsuario = () => {
   const history = useHistory();
 
-  const { signIn } = useContext(Context);
+  // const { signIn } = useContext(Context);
 
   const [dadosUsuario, setUsuario] = useState({
-    usuario: "",
+    nome: "",
+    email: "",
     senha: "",
   });
 
@@ -50,7 +51,7 @@ export const Login = () => {
     };
 
     api
-      .post("/login", dadosUsuario, { headers })
+      .post("/usuario", dadosUsuario, { headers })
       .then((response) => {
         if (response.data.error) {
           setStatus({
@@ -67,9 +68,9 @@ export const Login = () => {
           // Salvar o token localStorage
           localStorage.setItem("token", JSON.stringify(response.data.token));
           api.defaults.headers.Authorization = `Bearer ${response.data.token}`;
-          signIn(true);
+          // signIn(true);
           setTimeout(() => {
-            return history.push("/dashboard");
+            return history.push("/");
           }, 3500);
         }
       })
@@ -86,7 +87,7 @@ export const Login = () => {
     <Container>
       <FormLogin>
         {/* Titulo da página */}
-        <Titulo>Login</Titulo>
+        <Titulo>SignUp</Titulo>
 
         {status.type === "error" ? (
           <AlertDanger>{status.mensagem}</AlertDanger>
@@ -103,10 +104,16 @@ export const Login = () => {
           <Input
             autoFocus
             type="text"
-            name="usuario"
-            placeholder="Usuário"
+            name="nome"
+            placeholder="Nome"
             onChange={valorInput}
             autoComplete="on"
+          />
+          <Input
+            type="text"
+            name="email"
+            placeholder="Email"
+            onChange={valorInput}
           />
 
           <Input
@@ -122,12 +129,9 @@ export const Login = () => {
             </ButtomPrimary>
           ) : (
             <ButtomPrimary type="submit" size="sm">
-              Login
+              SignUp
             </ButtomPrimary>
           )}
-          <Link to="/cadastrarUsuario">
-            <ButtomPrimary>Cadastrar</ButtomPrimary>
-          </Link>
         </form>
         <TituloFooter>Copyright 2021© emersonpessoa</TituloFooter>
       </FormLogin>

@@ -9,6 +9,7 @@ import { Listar } from '../pages/Listar';
 import { Visualizar } from '../pages/Visualizar';
 import { Cadastrar } from '../pages/Cadastrar';
 import { Editar } from '../pages/Editar';
+import { CadastrarUsuario } from '../pages/Adm/CadastrarUsuario';
 
 export default function RoutesAdm() {
 
@@ -21,10 +22,11 @@ export default function RoutesAdm() {
 
         return <Route {...rest} />
     }
-    
+
     return (
         <Switch>
             <CustomRoute exact path="/" component={Login} />
+            <CustomRoute exact path="/cadastrarUsuario" component={CadastrarUsuario} />
             <CustomRoute isPrivate exact path="/dashboard" component={Dashboard} />
             <CustomRoute isPrivate exact path="/listar" component={Listar} />
             <CustomRoute isPrivate exact path="/visualizar/:id" component={Visualizar} />
