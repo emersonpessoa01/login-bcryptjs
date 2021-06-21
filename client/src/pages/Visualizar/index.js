@@ -88,10 +88,8 @@ export const Visualizar = (props) => {
             <tr className="text-center">
               <th style={{ borderTopLeftRadius: "10px" }}>ID</th>
               <th>Nome</th>
-              <th>Usuário</th>
-              <th style={{ borderTopRightRadius: "10px" }}>
-                Senha(Criptografada)
-              </th>
+              <th style={{ borderTopRightRadius: "10px" }}>Usuário</th>
+
             </tr>
           </thead>
 
@@ -100,7 +98,6 @@ export const Visualizar = (props) => {
               <td>{data.id}</td>
               <td>{data.nome}</td>
               <td>{data.email}</td>
-              <td>{data.senha}</td>
             </tr>
           </tbody>
         </Table>

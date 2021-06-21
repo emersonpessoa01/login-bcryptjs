@@ -5,7 +5,6 @@ import { Spinner } from "reactstrap";
 import history from "../services/history";
 
 import api from "../config/configApi";
-import Menu from "../components/Menu";
 
 const Context = createContext();
 

@@ -128,8 +128,8 @@ export const Cadastrar = () => {
           />
 
             {status.formSave ? (
-            <ButtonSuccess outline type="submit" disabled size="lg">
-              Cadastrando...<Spinner color="success" size="lg" />
+            <ButtonSuccess type="submit" disabled size="lg">
+              <Spinner color="success" size="sm" />
             </ButtonSuccess>
               ) : (
             <ButtonSuccess type="submit" size="lg">

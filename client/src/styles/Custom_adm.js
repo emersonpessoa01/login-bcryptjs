@@ -23,6 +23,8 @@ export const BotaoAcao = styled.section`
 `;
 
 export const ButtonSuccess = styled.button`
+  width: 100%;
+  max-width: 96px;
   background-color: #fff;
   color: #198754;
   padding: 5px 8px;
@@ -34,6 +36,11 @@ export const ButtonSuccess = styled.button`
     background-color: #198754;
     color: #fff;
     transition: 0.9s;
+  }
+  :disabled,[disabled]{
+    border: 1px solid #198754;
+    background-color: #fff;
+    color: #198754;
   }
 `;
 
@@ -53,6 +60,8 @@ export const ButtonPrimary = styled.button`
 `;
 
 export const ButtonWarning = styled.button`
+  width: 100%;
+  max-width: 96px;
   background-color: #fff;
   color: #ffc107;
   padding: 5px 8px;
@@ -65,9 +74,17 @@ export const ButtonWarning = styled.button`
     color: #fff;
     transition: 0.9s;
   }
+  :disabled,
+  [disabled] {
+    border: 1px solid #ffc107;
+    background-color: #fff;
+    color: #ffc107;
+  }
 `;
 
 export const ButtonDanger = styled.button`
+  width: 100%;
+  max-width: 96px;
   background-color: #fff;
   color: #dc3545;
   padding: 5px 8px;
