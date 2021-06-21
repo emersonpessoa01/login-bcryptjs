@@ -117,7 +117,7 @@ export const Login = () => {
             onChange={valorInput}
           />
           {status.formSave ? (
-            <ButtomPrimary outline type="submit" disabled size="lg">
+            <ButtomPrimary type="submit" disabled size="lg">
               <Spinner color="light" size="sm" />
             </ButtomPrimary>
           ) : (

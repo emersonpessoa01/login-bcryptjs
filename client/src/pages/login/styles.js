@@ -61,6 +61,12 @@ export const ButtomPrimary = styled.button`
     color: #fff;
     transition: 1.1s;
   }
+  :disabled,
+  [disabled] {
+    border: 1px solid #999999;
+    background-color: #cccccc;
+    color: #666666;
+  }
 `;
 
 export const AlertDanger = styled.p`
