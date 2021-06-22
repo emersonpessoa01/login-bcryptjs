@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import Menu from "../../components/Menu";
 
-import {Spinner} from "reactstrap"
+import { Spinner } from "reactstrap";
 
 import {
   Container,
@@ -23,45 +23,47 @@ import {
 import api from "../../config/configApi";
 
 export const Cadastrar = () => {
-  const [usuario, setUsuario] = useState({
-    nome: "",
-    email: "",
-    senha: "",
-  });
+  const [nome, setNome] = useState("");
+  const [email, setEmail] = useState("");
+  const [senha, setSenha] = useState("");
 
   const [status, setStatus] = useState({
-    formSave:false,
+    formSave: false,
     type: "",
     mensagem: "",
   });
 
-  const valorInput = (e) =>
-    setUsuario({ ...usuario, [e.target.name]: e.target.value });
+  //const valorInput =(e)=>setUsuario({ ...dadosUsuario, [e.target.name]: e.target.value})
 
   const cadUsuario = async (e) => {
     e.preventDefault();
 
-    setStatus({
-    formSave:true,
+    const data = {
+      nome: nome,
+      email: email,
+      senha: senha,
+    };
 
-    })
+    setStatus({
+      formSave: true,
+    });
 
     const headers = {
       "Content-Type": "application/json",
     };
 
     await api
-      .post("/usuario", usuario, { headers })
+      .post("/usuario", data, { headers })
       .then((response) => {
         if (response.data.error) {
           setStatus({
-            formSave:false,
+            formSave: false,
             type: "error",
             mensagem: response.data.message,
           });
         } else {
           setStatus({
-            formSave:false,
+            formSave: false,
             type: "success",
             mensagem: response.data.message,
           });
@@ -69,7 +71,7 @@ export const Cadastrar = () => {
       })
       .catch(() => {
         setStatus({
-          formSave:false,
+          formSave: false,
           type: "error",
           mensagem: "Erro: Tente mais tarde!",
         });
@@ -104,10 +106,11 @@ export const Cadastrar = () => {
         <Form onSubmit={cadUsuario}>
           <Label>Nome: </Label>
           <Input
-            type="text"
-            name="nome"
-            placeholder="Nome do usuário"
-            onChange={valorInput}
+          type="nome"
+          name="nome"
+          placeholder="Nome do usuário"
+          value={nome}
+          onChange={(e) => setNome(e.target.value)}
           />
 
           <Label>E-mail: </Label>
@@ -115,7 +118,8 @@ export const Cadastrar = () => {
             type="email"
             name="email"
             placeholder="E-mail do usuário"
-            onChange={valorInput}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
 
           <Label>Senha: </Label>
@@ -124,18 +128,19 @@ export const Cadastrar = () => {
             name="senha"
             placeholder="Senha para acessar o administrativo"
             autoComplete="on"
-            onChange={valorInput}
+            value={senha}
+            onChange={(e) => setSenha(e.target.value)}
           />
 
-            {status.formSave ? (
+          {status.formSave ? (
             <ButtonSuccess type="submit" disabled size="lg">
               <Spinner color="success" size="sm" />
             </ButtonSuccess>
-              ) : (
+          ) : (
             <ButtonSuccess type="submit" size="lg">
               Cadastrar
             </ButtonSuccess>
-            )}
+          )}
         </Form>
       </Conteudo>
     </Container>
