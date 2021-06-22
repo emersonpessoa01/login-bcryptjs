@@ -20,7 +20,7 @@ import {
   ButtonWarning,
   ButtonDanger,
   Conteudo,
-} from "../../styles/custom_adm";
+} from "../../styles/Custom_adm";
 
 export const Listar = () => {
   const [data, setData] = useState({});
@@ -121,21 +121,21 @@ export const Listar = () => {
         ) : (
           <Table>
             <thead>
-              <tr className="text-center">
+              <tr>
                 <th style={{ borderTopLeftRadius: "10px" }}>ID</th>
                 <th>Nome</th>
                 <th>E-mail</th>
-                <th style={{ borderTopRightRadius: "10px" }}>Ações</th>
+                <th className="text-center" style={{ borderTopRightRadius: "10px" }}>Ações</th>
               </tr>
             </thead>
             <tbody>
               {Array.isArray(data) &&
                 data.map((usuario) => (
-                  <tr className="text-center" key={usuario.id}>
+                  <tr key={usuario.id}>
                     <td>{usuario.id}</td>
                     <td>{usuario.nome}</td>
                     <td>{usuario.email}</td>
-                    <td>
+                    <td className="text-center">
                       <Link to={"/visualizar/" + usuario.id}>
                         <ButtonPrimary>Visualizar</ButtonPrimary>
                       </Link>{" "}

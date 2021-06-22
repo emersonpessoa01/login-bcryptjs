@@ -60,8 +60,8 @@ export const ButtonPrimary = styled.button`
 `;
 
 export const ButtonWarning = styled.button`
-  width: 100%;
-  max-width: 96px;
+  /* width: 100%;
+  max-width: 96px; */
   background-color: #fff;
   color: #ffc107;
   padding: 5px 8px;
@@ -83,8 +83,8 @@ export const ButtonWarning = styled.button`
 `;
 
 export const ButtonDanger = styled.button`
-  width: 100%;
-  max-width: 96px;
+  /* width: 100%;
+  max-width: 96px; */
   background-color: #fff;
   color: #dc3545;
   padding: 5px 8px;

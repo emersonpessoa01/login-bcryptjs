@@ -5,6 +5,8 @@ import Menu from "../../components/Menu";
 
 import { Spinner } from "reactstrap";
 
+import { ButtomWarningEdit } from "./styles";
+
 import {
   Container,
   ConteudoTitulo,
@@ -17,9 +19,8 @@ import {
   Form,
   Label,
   Input,
-  ButtonWarning,
   ButtonPrimary,
-} from "../../styles/custom_adm";
+} from "../../styles/Custom_adm";
 
 import api from "../../config/configApi";
 
@@ -155,13 +156,13 @@ export const Editar = (props) => {
           />
 
           {status.formSave ? (
-            <ButtonWarning type="submit" disabled size="sm">
+            <ButtomWarningEdit type="submit" disabled size="sm">
               <Spinner center color="warning" size="sm" />
-            </ButtonWarning>
+            </ButtomWarningEdit>
           ) : (
-            <ButtonWarning type="submit" size="sm">
+            <ButtomWarningEdit type="submit" size="sm">
               Editar
-            </ButtonWarning>
+            </ButtomWarningEdit>
           )}
         </Form>
       </Conteudo>

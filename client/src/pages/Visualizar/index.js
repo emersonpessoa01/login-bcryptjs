@@ -14,7 +14,7 @@ import {
   Conteudo,
   Table,
   ButtonPrimary,
-} from "../../styles/custom_adm";
+} from "../../styles/Custom_adm";
 // import { ConteudoUsuario } from "./styles";
 
 import api from "../../config/configApi";

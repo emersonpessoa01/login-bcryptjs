@@ -18,7 +18,7 @@ import {
   Label,
   Input,
   ButtonSuccess,
-} from "../../styles/custom_adm";
+} from "../../styles/Custom_adm";
 
 import api from "../../config/configApi";
 
