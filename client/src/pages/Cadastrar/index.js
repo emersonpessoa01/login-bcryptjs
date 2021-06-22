@@ -39,9 +39,9 @@ export const Cadastrar = () => {
     e.preventDefault();
 
     const data = {
-      nome: nome,
-      email: email,
-      senha: senha,
+      nome,
+      email,
+      senha,
     };
 
     setStatus({
@@ -52,30 +52,38 @@ export const Cadastrar = () => {
       "Content-Type": "application/json",
     };
 
-    await api
-      .post("/usuario", data, { headers })
-      .then((response) => {
-        if (response.data.error) {
+    if (nome !== "" & email !== "" && senha !== "") {
+      await api
+        .post("/usuario", data, { headers })
+        .then((response) => {
+          if (response.data.error) {
+            setStatus({
+              formSave: false,
+              type: "error",
+              mensagem: response.data.message,
+            });
+          } else {
+            setStatus({
+              formSave: false,
+              type: "success",
+              mensagem: response.data.message,
+            });
+          }
+        })
+        .catch(() => {
           setStatus({
             formSave: false,
             type: "error",
-            mensagem: response.data.message,
+            mensagem: "Erro: Tente mais tarde!",
           });
-        } else {
-          setStatus({
-            formSave: false,
-            type: "success",
-            mensagem: response.data.message,
-          });
-        }
-      })
-      .catch(() => {
-        setStatus({
-          formSave: false,
-          type: "error",
-          mensagem: "Erro: Tente mais tarde!",
         });
+    } else {
+      setStatus({
+        formSave: false,
+        type: "error",
+        mensagem: "Erro: Por favor, preencha todos os dados!",
       });
+    }
   };
 
   return (
@@ -106,11 +114,11 @@ export const Cadastrar = () => {
         <Form onSubmit={cadUsuario}>
           <Label>Nome: </Label>
           <Input
-          type="nome"
-          name="nome"
-          placeholder="Nome do usuário"
-          value={nome}
-          onChange={(e) => setNome(e.target.value)}
+            type="nome"
+            name="nome"
+            placeholder="Nome do usuário"
+            value={nome}
+            onChange={(e) => setNome(e.target.value)}
           />
 
           <Label>E-mail: </Label>
