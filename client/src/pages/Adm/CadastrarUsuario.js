@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import {  useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 import { Spinner } from "reactstrap";
 
@@ -24,11 +24,9 @@ export const CadastrarUsuario = () => {
 
   // const { signIn } = useContext(Context);
 
-  const [dadosUsuario, setUsuario] = useState({
-    nome: "",
-    email: "",
-    senha: "",
-  });
+  const [nome, setNome] = useState("");
+  const [email, setEmail] = useState("");
+  const [senha, setSenha] = useState("");
 
   const [status, setStatus] = useState({
     formSave: false,
@@ -36,11 +34,14 @@ export const CadastrarUsuario = () => {
     mensagem: "",
   });
 
-  const valorInput = (e) =>
-    setUsuario({ ...dadosUsuario, [e.target.name]: e.target.value });
-
-  const loginSubmit = async (e) => {
+  const cadSubmit = async (e) => {
     e.preventDefault();
+
+    const data = {
+      nome,
+      email,
+      senha,
+    };
 
     setStatus({
       formSave: true,
@@ -49,38 +50,42 @@ export const CadastrarUsuario = () => {
     const headers = {
       "Content-Type": "application/json",
     };
-
-    api
-      .post("/usuario", dadosUsuario, { headers })
-      .then((response) => {
-        if (response.data.error) {
+    if ((nome !== "") & (email !== "") & (senha !== "")) {
+      api
+        .post("/usuario", data, { headers })
+        .then((response) => {
+          if (response.data.error) {
+            setStatus({
+              formSave: false,
+              type: "error",
+              mensagem: response.data.message,
+            });
+          } else {
+            setStatus({
+              formSave: false,
+              type: "success",
+              mensagem: response.data.message,
+            });
+            // signIn(true);
+            setTimeout(() => {
+              return history.push("/");
+            }, 3500);
+          }
+        })
+        .catch(() => {
           setStatus({
             formSave: false,
             type: "error",
-            mensagem: response.data.message,
+            mensagem: "Erro: Usuário ou senha a senha incorreta!",
           });
-        } else {
-          setStatus({
-            formSave: false,
-            type: "success",
-            mensagem: response.data.message,
-          });
-          // Salvar o token localStorage
-          localStorage.setItem("token", JSON.stringify(response.data.token));
-          api.defaults.headers.Authorization = `Bearer ${response.data.token}`;
-          // signIn(true);
-          setTimeout(() => {
-            return history.push("/");
-          }, 3500);
-        }
-      })
-      .catch(() => {
-        setStatus({
-          formSave: false,
-          type: "error",
-          mensagem: "Erro: Usuário ou senha a senha incorreta!",
         });
+    } else {
+      setStatus({
+        formSave: false,
+        type: "error",
+        mensagem: "Erro: Por favor, preencha todos os dados!",
       });
+    }
   };
 
   return (
@@ -100,28 +105,30 @@ export const CadastrarUsuario = () => {
           ""
         )}
 
-        <form onSubmit={loginSubmit}>
+        <form onSubmit={cadSubmit}>
           <Input
             autoFocus
             type="text"
             name="nome"
             placeholder="Nome"
-            onChange={valorInput}
-            autoComplete="on"
+            value={nome}
+            onChange={(e) => setNome(e.target.value)}
+            autoComplete="nome"
           />
           <Input
             type="text"
             name="email"
             placeholder="Email"
-            onChange={valorInput}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
 
           <Input
             type="password"
             name="senha"
             placeholder="Senha"
-            autoComplete="on"
-            onChange={valorInput}
+            value={senha}
+            onChange={(e) => setSenha(e.target.value)}
           />
           {status.formSave ? (
             <ButtomPrimary type="submit" disabled size="lg">
