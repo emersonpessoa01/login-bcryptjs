@@ -81,7 +81,7 @@ export const Cadastrar = () => {
       setStatus({
         formSave: false,
         type: "error",
-        mensagem: "Erro: Por favor, preencha todos os dados!",
+        mensagem: "Atenção: Por favor, preencha todos os dados!",
       });
     }
   };

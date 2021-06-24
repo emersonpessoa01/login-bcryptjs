@@ -135,7 +135,8 @@ export const AlertDanger = styled.p`
   background-color: #f8d7da;
   color: #842029;
   margin: 20px 0;
-  border: 1px solid #f5c2c7;
+  /* border: 1px solid #f5c2c7; */
+  border-left: 10px solid #842029;
   border-radius: 4px;
   padding: 7px;
 `;
@@ -147,7 +148,7 @@ export const AlertSuccess = styled.p`
   background-color: #d1e7dd;
   color: #0f5132;
   margin: 20px 0;
-  border: 1px solid #badbcc;
+  border-left: 1px solid #0f5132;
   border-radius: 4px;
   padding: 7px;
 `;

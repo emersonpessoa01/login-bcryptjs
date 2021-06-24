@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 
 import { Spinner } from "reactstrap";
 
@@ -83,7 +83,7 @@ export const CadastrarUsuario = () => {
       setStatus({
         formSave: false,
         type: "error",
-        mensagem: "Erro: Por favor, preencha todos os dados!",
+        mensagem: "Atencão: Por favor, preencha todos os dados!",
       });
     }
   };
@@ -139,6 +139,15 @@ export const CadastrarUsuario = () => {
               SignUp
             </ButtomPrimary>
           )}
+          <Link
+            style={{
+              textDecoration: "none",
+              fontWeight: "bold",
+            }}
+            to={"/"}
+          >
+            Voltar
+          </Link>
         </form>
         <TituloFooter>Copyright 2021© emersonpessoa</TituloFooter>
       </FormLogin>
