@@ -116,7 +116,7 @@ export const CadastrarUsuario = () => {
             autoComplete="nome"
           />
           <Input
-            type="text"
+            type="email"
             name="email"
             placeholder="Email"
             value={email}

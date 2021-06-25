@@ -77,4 +77,11 @@
 * Importando no index.js<br>
 *import "bootstrap/dist/css/bootstrap.css"*
 
+* Faz validação de formulários<br>
+*yarn add react-hook-form*<br>
+*yarn add yup*<br>
+*yarn add @hookform/resolvers*
+
+
+
 

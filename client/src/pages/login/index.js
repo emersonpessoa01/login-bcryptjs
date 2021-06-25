@@ -24,9 +24,9 @@ export const Login = () => {
 
   const { signIn } = useContext(Context);
 
-  const [dadosUsuario, setUsuario] = useState({
+  const [dadosUsuario,setUsuario] = useState({
     usuario: "",
-    senha: "",
+    senha:""
   });
 
   const [status, setStatus] = useState({
@@ -35,11 +35,14 @@ export const Login = () => {
     mensagem: "",
   });
 
-  const valorInput = (e) =>
-    setUsuario({ ...dadosUsuario, [e.target.name]: e.target.value });
+  const valorInput= (e) =>setUsuario({
+    ...dadosUsuario,
+    [e.target.name]:e.target.value
+  })
 
   const loginSubmit = async (e) => {
     e.preventDefault();
+
 
     setStatus({
       formSave: true,
@@ -115,6 +118,7 @@ export const Login = () => {
             placeholder="Senha"
             autoComplete="on"
             onChange={valorInput}
+
           />
           {status.formSave ? (
             <ButtomPrimary type="submit" disabled size="lg">
