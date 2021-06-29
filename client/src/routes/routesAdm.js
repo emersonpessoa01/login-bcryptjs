@@ -3,7 +3,7 @@ import { Switch, Route, Redirect } from "react-router-dom";
 
 import { Context } from "../Context/AuthContext";
 
-import { Login } from "../pages/login";
+import { Login } from "../pages/login/index";
 import { Dashboard } from "../pages/Dashboard";
 import { Listar } from "../pages/Listar";
 import { Visualizar } from "../pages/Visualizar";
