@@ -98,3 +98,7 @@ export const AlertSuccess = styled.p`
   border-radius: 4px;
   padding: 7px;
 `;
+export const ValidationStyled = styled.h6`
+    font-size:10.5px;
+    padding-top: 5px
+`;

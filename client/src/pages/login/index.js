@@ -16,6 +16,7 @@ import {
   AlertDanger,
   AlertSuccess,
   TituloFooter,
+  ValidationStyled,
 } from "./styles";
 
 import { Context } from "../../Context/AuthContext";
@@ -28,8 +29,14 @@ export const Login = () => {
   const { signIn } = useContext(Context);
 
   const validationSchema = yup.object({
-    usuario: yup.string().required("Required"),
-    senha: yup.string().required("Required"),
+    usuario: yup
+      .string()
+      .email("O usuário deve ser um email válido")
+      .required("Campo obrigatório"),
+    senha: yup
+      .string()
+      .min(8, "A senha deve conter pelo menos 8 caracteres")
+      .required("Campo obrigatório"),
   });
 
   const [status, setStatus] = useState({
@@ -66,10 +73,11 @@ export const Login = () => {
               type: "success",
               mensagem: response.data.message,
             });
-            console.log( response.data.message)
+            console.log(response.data.message);
             localStorage.setItem("token", JSON.stringify(response.data.token));
             api.defaults.headers.Authorization = `Bearer ${response.data.token}`;
             signIn(true);
+
             setTimeout(() => {
               return history.push("/dashboard");
             }, 3500);
@@ -112,7 +120,9 @@ export const Login = () => {
             autoComplete="on"
             values={values.usuario}
           />
-          {errors.usuario ? errors.usuario : null}
+          {errors.usuario ? (
+            <ValidationStyled>{errors.usuario}</ValidationStyled>
+          ) : null}
           <Input
             type="password"
             name="senha"
@@ -121,7 +131,9 @@ export const Login = () => {
             onChange={handleChange}
             values={values.senha}
           />
-          {errors.senha ? errors.senha : null}
+          {errors.senha ? (
+            <ValidationStyled>{errors.senha}</ValidationStyled>
+          ) : null}
           {status.formSave ? (
             <ButtomPrimary type="submit" disabled size="lg">
               <Spinner color="light" size="sm" />
