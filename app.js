@@ -200,10 +200,10 @@ app.post("/usuario", async (req, res) => {
         message: "Usuário cadastrado com sucesso!",
       });
     })
-    .catch((err) => {
+    .catch(() => {
       return res.json({
         error: true,
-        message: "Error: Usuário não cadastrado com sucesso!" + err,
+        message: "Error: Usuário não cadastrado com sucesso!",
       });
     });
 });

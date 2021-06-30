@@ -1,0 +1,8 @@
+input.error {
+  border-color: red;
+}
+.promotion-form__group {
+  /* display: flex; */
+  /* flex-direction: column; */
+  margin: 0 120px;
+}

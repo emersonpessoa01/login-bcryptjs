@@ -19,8 +19,8 @@ export const FormLogin = styled.section`
 export const Titulo = styled.h1`
   color: #3e3e3e;
   font-size: 27px;
-  text-align: center;
   padding: 20px 5px;
+  text-align: center;
 `;
 
 export const TituloFooter = styled.h2`
@@ -46,7 +46,6 @@ export const Input = styled.input`
     border: 1px solid #1636dd;
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075),
       0 0 0 3px rgba(0, 126, 255, 0.1);
-    outline: none;
   }
 `;
 

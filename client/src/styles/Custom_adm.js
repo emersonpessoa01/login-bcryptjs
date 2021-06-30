@@ -9,6 +9,8 @@ export const Container = styled.section`
 export const ConteudoTitulo = styled.section`
   display: flex;
   justify-content: space-between;
+
+
 `;
 
 export const Titulo = styled.h1`
@@ -16,10 +18,14 @@ export const Titulo = styled.h1`
   font-family: sans-serif;
   margin: 10px 15px;
   color: #1d1e1e;
+  text-align: center;
+
+
 `;
 
 export const BotaoAcao = styled.section`
   margin: 5px;
+  text-align: right;
 `;
 
 export const ButtonSuccess = styled.button`
@@ -165,7 +171,7 @@ export const Label = styled.label`
   width: 100%;
   /* padding: 12px; */
   margin-top: 6px;
-  margin-bottom: 16px;
+  margin-bottom: 8px;
 `;
 
 export const Input = styled.input`

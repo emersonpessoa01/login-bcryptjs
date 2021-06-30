@@ -126,7 +126,6 @@ export const Login = () => {
             name="usuario"
             placeholder="Usuário"
             onChange={handleChange}
-            autoComplete="on"
             values={values.usuario}
             onBlur={handleBlur}
             className={
@@ -153,6 +152,7 @@ export const Login = () => {
           {errors.senha && touched.senha ? (
             <ValidationStyled>{errors.senha}</ValidationStyled>
           ) : null}
+          
           {status.formSave ? (
             <ButtomPrimary type="submit" disabled size="lg">
               <Spinner color="light" size="sm" />
