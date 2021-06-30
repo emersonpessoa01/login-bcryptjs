@@ -4,6 +4,9 @@ import { Link, useHistory } from "react-router-dom";
 
 import { Spinner } from "reactstrap";
 
+import { useFormik } from "formik";
+import * as yup from "yup";
+
 import {
   Container,
   FormLogin,
@@ -24,9 +27,9 @@ export const Login = () => {
 
   const { signIn } = useContext(Context);
 
-  const [dadosUsuario,setUsuario] = useState({
-    usuario: "",
-    senha:""
+  const validationSchema = yup.object({
+    usuario: yup.string().required("Required"),
+    senha: yup.string().required("Required"),
   });
 
   const [status, setStatus] = useState({
@@ -35,55 +38,52 @@ export const Login = () => {
     mensagem: "",
   });
 
-  const valorInput= (e) =>setUsuario({
-    ...dadosUsuario,
-    [e.target.name]:e.target.value
-  })
+  const { handleSubmit, handleChange, values, errors } = useFormik({
+    initialValues: {
+      usuario: "",
+      senha: "",
+    },
+    validationSchema,
+    onSubmit(values) {
+      // alert(JSON.stringify(values));
+      setStatus({ formSave: true });
 
-  const loginSubmit = async (e) => {
-    e.preventDefault();
-
-
-    setStatus({
-      formSave: true,
-    });
-
-    const headers = {
-      "Content-Type": "application/json",
-    };
-
-    api
-      .post("/login", dadosUsuario, { headers })
-      .then((response) => {
-        if (response.data.error) {
+      const headers = {
+        "Content-Type": "application/json",
+      };
+      api
+        .post("/login", values, { headers })
+        .then((response) => {
+          if (response.data.error) {
+            setStatus({
+              formSave: false,
+              type: "error",
+              mensagem: response.data.message,
+            });
+          } else {
+            setStatus({
+              formSave: false,
+              type: "success",
+              mensagem: response.data.message,
+            });
+            console.log( response.data.message)
+            localStorage.setItem("token", JSON.stringify(response.data.token));
+            api.defaults.headers.Authorization = `Bearer ${response.data.token}`;
+            signIn(true);
+            setTimeout(() => {
+              return history.push("/dashboard");
+            }, 3500);
+          }
+        })
+        .catch(() => {
           setStatus({
             formSave: false,
             type: "error",
-            mensagem: response.data.message,
+            mensagem: "Erro: Tente mais tarde",
           });
-        } else {
-          setStatus({
-            formSave: false,
-            type: "success",
-            mensagem: response.data.message,
-          });
-          // Salvar o token localStorage
-          localStorage.setItem("token", JSON.stringify(response.data.token));
-          api.defaults.headers.Authorization = `Bearer ${response.data.token}`;
-          signIn(true);
-          setTimeout(() => {
-            return history.push("/dashboard");
-          }, 3500);
-        }
-      })
-      .catch(() => {
-        setStatus({
-          formSave: false,
-          type: "error",
-          mensagem: "Erro: Usuário ou senha a senha incorreta!",
         });
-      });
-  };
+    },
+  });
 
   return (
     <Container>
@@ -102,24 +102,26 @@ export const Login = () => {
           ""
         )}
 
-        <form onSubmit={loginSubmit}>
+        <form onSubmit={handleSubmit}>
           <Input
             autoFocus
             type="text"
             name="usuario"
             placeholder="Usuário"
-            onChange={valorInput}
+            onChange={handleChange}
             autoComplete="on"
+            values={values.usuario}
           />
-
+          {errors.usuario ? errors.usuario : null}
           <Input
             type="password"
             name="senha"
             placeholder="Senha"
             autoComplete="on"
-            onChange={valorInput}
-
+            onChange={handleChange}
+            values={values.senha}
           />
+          {errors.senha ? errors.senha : null}
           {status.formSave ? (
             <ButtomPrimary type="submit" disabled size="lg">
               <Spinner color="light" size="sm" />
