@@ -102,3 +102,8 @@ export const ValidationStyled = styled.div`
   color: red;
   margin: 0 auto;
 `;
+
+export const InputError = styled.input`
+  color: red;
+  margin: 0 auto;
+`;

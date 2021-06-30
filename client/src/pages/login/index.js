@@ -7,6 +7,8 @@ import { Spinner } from "reactstrap";
 import { useFormik } from "formik";
 import * as yup from "yup";
 
+import "./helpers.css";
+
 import {
   Container,
   FormLogin,
@@ -17,6 +19,7 @@ import {
   AlertSuccess,
   TituloFooter,
   ValidationStyled,
+  InputError,
 } from "./styles";
 
 import { Context } from "../../Context/AuthContext";
@@ -128,7 +131,9 @@ export const Login = () => {
             values={values.usuario}
             onBlur={handleBlur}
             className={
-              errors.name && touched.name ? "text-input error" : "text-input"
+              errors.usuario && touched.usuario
+                ? "text-input error"
+                : "text-input"
             }
           />
           {errors.usuario && touched.usuario ? (
@@ -142,6 +147,9 @@ export const Login = () => {
             onChange={handleChange}
             values={values.senha}
             onBlur={handleBlur}
+            className={
+              errors.senha && touched.senha ? "text-input error" : "text-input"
+            }
           />
           {errors.senha && touched.senha ? (
             <ValidationStyled>{errors.senha}</ValidationStyled>
