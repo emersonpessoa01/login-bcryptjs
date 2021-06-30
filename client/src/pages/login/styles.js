@@ -44,6 +44,9 @@ export const Input = styled.input`
   :focus {
     outline: none !important;
     border: 1px solid #1636dd;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075),
+      0 0 0 3px rgba(0, 126, 255, 0.1);
+    outline: none;
   }
 `;
 
@@ -99,11 +102,6 @@ export const AlertSuccess = styled.p`
   padding: 7px;
 `;
 export const ValidationStyled = styled.div`
-  color: red;
-  margin: 0 auto;
-`;
-
-export const InputError = styled.input`
   color: red;
   margin: 0 auto;
 `;
