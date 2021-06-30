@@ -45,7 +45,14 @@ export const Login = () => {
     mensagem: "",
   });
 
-  const { handleSubmit, handleChange, values, errors } = useFormik({
+  const {
+    handleSubmit,
+    handleChange,
+    values,
+    errors,
+    touched,
+    handleBlur,
+  } = useFormik({
     initialValues: {
       usuario: "",
       senha: "",
@@ -119,8 +126,12 @@ export const Login = () => {
             onChange={handleChange}
             autoComplete="on"
             values={values.usuario}
+            onBlur={handleBlur}
+            className={
+              errors.name && touched.name ? "text-input error" : "text-input"
+            }
           />
-          {errors.usuario ? (
+          {errors.usuario && touched.usuario ? (
             <ValidationStyled>{errors.usuario}</ValidationStyled>
           ) : null}
           <Input
@@ -130,8 +141,9 @@ export const Login = () => {
             autoComplete="on"
             onChange={handleChange}
             values={values.senha}
+            onBlur={handleBlur}
           />
-          {errors.senha ? (
+          {errors.senha && touched.senha ? (
             <ValidationStyled>{errors.senha}</ValidationStyled>
           ) : null}
           {status.formSave ? (
