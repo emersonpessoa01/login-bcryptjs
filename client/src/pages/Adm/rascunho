@@ -4,24 +4,17 @@ import { useHistory, Link } from "react-router-dom";
 
 import { Spinner } from "reactstrap";
 
-import * as yup from "yup";
-
-import { useFormik } from "formik";
-
-import "./helpers.css";
 
 import {
   Container,
   FormLogin,
   Titulo,
+  Input,
   ButtomPrimary,
   AlertDanger,
   AlertSuccess,
   TituloFooter,
-  ValidationStyled,
-  Input
 } from "./styles";
-
 
 // import { Context } from "../../Context/AuthContext";
 
@@ -32,51 +25,35 @@ export const CadastrarUsuario = () => {
 
   // const { signIn } = useContext(Context);
 
+  const [nome, setNome] = useState("");
+  const [email, setEmail] = useState("");
+  const [senha, setSenha] = useState("");
+
   const [status, setStatus] = useState({
     formSave: false,
     type: "",
     mensagem: "",
   });
 
-  const validationSchema = yup.object({
-    nome: yup
-      .string()
-      .min(2, "O nome deve conter pelo menos 2 caracteres")
-      .required("Campo obrigatório"),
-    email: yup
-      .string()
-      .email("O usuário deve ser um email válido")
-      .required("Campo obrigatório"),
-    senha: yup
-      .string()
-      .min(8, "A senha deve conter pelo menos 8 caracteres")
-      .required("Campo obrigatório"),
-  });
+  const cadSubmit = async (e) => {
+    e.preventDefault();
 
-  const {
-    handleSubmit,
-    handleChange,
-    values,
-    errors,
-    touched,
-    handleBlur,
-  } = useFormik({
-    initialValues: {
-      nome: "",
-      email: "",
-      senha: "",
-    },
-    validationSchema,
-    onSubmit(values) {
-      // alert(JSON.stringify(values));
-      setStatus({ formSave: true });
+    const data = {
+      nome,
+      email,
+      senha,
+    };
 
-      const headers = {
-        "Content-Type": "application/json",
-      };
+    setStatus({
+      formSave: true,
+    });
 
+    const headers = {
+      "Content-Type": "application/json",
+    };
+    if ((nome !== "") & (email !== "") & (senha !== "")) {
       api
-        .post("/usuario", values, { headers })
+        .post("/usuario", data, { headers })
         .then((response) => {
           if (response.data.error) {
             setStatus({
@@ -90,21 +67,27 @@ export const CadastrarUsuario = () => {
               type: "success",
               mensagem: response.data.message,
             });
+            // signIn(true);
             setTimeout(() => {
               return history.push("/");
             }, 3500);
-            console.log(response.data.message);
           }
         })
         .catch(() => {
           setStatus({
             formSave: false,
             type: "error",
-            mensagem: "Erro: Tente mais tarde",
+            mensagem: "Erro: Usuário ou senha a senha incorreta!",
           });
         });
-    },
-  });
+    } else {
+      setStatus({
+        formSave: false,
+        type: "error",
+        mensagem: "Atencão: Por favor, preencha todos os dados!",
+      });
+    }
+  };
 
   return (
     <Container>
@@ -123,52 +106,31 @@ export const CadastrarUsuario = () => {
           ""
         )}
 
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={cadSubmit}>
           <Input
             autoFocus
             type="text"
             name="nome"
             placeholder="Nome"
-            values={values.nome}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            className={
-              errors.nome && touched.nome ? "text-input error" : "text-input"
-            }
+            value={nome}
+            onChange={(e) => setNome(e.target.value)}
+            autoComplete="nome"
           />
-          {errors.nome && touched.nome ? (
-            <ValidationStyled>{errors.nome}</ValidationStyled>
-          ) : null}
           <Input
             type="email"
             name="email"
             placeholder="Email"
-            values={values.email}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            className={
-              errors.email && touched.email ? "text-input error" : "text-input"
-            }
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
-          {errors.email && touched.email ? (
-            <ValidationStyled>{errors.email}</ValidationStyled>
-          ) : null}
 
           <Input
             type="password"
             name="senha"
             placeholder="Senha"
-            values={values.senha}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            className={
-              errors.senha && touched.senha ? "text-input error" : "text-input"
-            }
+            value={senha}
+            onChange={(e) => setSenha(e.target.value)}
           />
-          {errors.senha && touched.senha ? (
-            <ValidationStyled>{errors.senha}</ValidationStyled>
-          ) : null}
-
           {status.formSave ? (
             <ButtomPrimary type="submit" disabled size="lg">
               <Spinner color="light" size="sm" />

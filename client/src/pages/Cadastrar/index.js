@@ -59,7 +59,8 @@ export const Cadastrar = () => {
     handleBlur,
   } = useFormik({
     initialValues: {
-      usuario: "",
+      nome: "",
+      email:"",
       senha: "",
     },
     validationSchema,
@@ -71,7 +72,7 @@ export const Cadastrar = () => {
       };
 
       api
-        .post("/usuario", values)
+        .post("/usuario", values, {headers})
         .then((response) => {
           if (response.data.error) {
             setStatus({
