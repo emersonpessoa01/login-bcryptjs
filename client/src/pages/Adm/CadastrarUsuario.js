@@ -181,7 +181,6 @@ export const CadastrarUsuario = () => {
           <Link
             style={{
               textDecoration: "none",
-              fontWeight: "bold",
             }}
             to={"/"}
           >

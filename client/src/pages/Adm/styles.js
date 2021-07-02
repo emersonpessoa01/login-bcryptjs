@@ -17,7 +17,8 @@ export const FormLogin = styled.section`
 `;
 
 export const Titulo = styled.h1`
-  color: #3e3e3e;
+  /* color: #3e3e3e; */
+  color: #0d6efd;
   font-size: 27px;
   text-align: center;
   padding: 20px 5px;
@@ -104,4 +105,3 @@ export const ValidationStyled = styled.div`
   color: red;
   margin: 0 auto;
 `;
-
