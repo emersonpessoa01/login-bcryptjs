@@ -109,12 +109,12 @@ export const Login = () => {
         <Titulo>Login</Titulo>
 
         {status.type === "error" ? (
-          <AlertDanger>{status.mensagem}</AlertDanger>
+          <AlertDanger><i className="far fa-frown lg">{status.mensagem}</i></AlertDanger>
         ) : (
           ""
         )}
         {status.type === "success" ? (
-          <AlertSuccess>{status.mensagem}</AlertSuccess>
+          <AlertSuccess><i className="far fa-smile lg">{status.mensagem}</i></AlertSuccess>
         ) : (
           ""
         )}
@@ -152,7 +152,7 @@ export const Login = () => {
           {errors.senha && touched.senha ? (
             <ValidationStyled>{errors.senha}</ValidationStyled>
           ) : null}
-          
+
           {status.formSave ? (
             <ButtomPrimary type="submit" disabled size="lg">
               <Spinner color="light" size="sm" />

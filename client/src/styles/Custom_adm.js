@@ -142,7 +142,7 @@ export const AlertDanger = styled.p`
   color: #842029;
   margin: 20px 0;
   /* border: 1px solid #f5c2c7; */
-  border-left: 4px solid #ff0000;
+  border-left: 4px solid #f01742;
   border-radius: 4px;
   padding: 7px;
 `;

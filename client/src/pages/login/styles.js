@@ -82,11 +82,12 @@ export const AlertDanger = styled.p`
   justify-content: center;
   background-color: #f8d7da;
   color: #842029;
+  font-family: "Lato", sans-serif;
   margin: 20px 0;
   /* border: 1px solid #f5c2c7; */
-  border-left: 4px solid #ff0000;
+  border-left: 4px solid #f01742;
   border-radius: 4px;
-  padding: 7px;
+  padding: 14px;
 `;
 
 export const AlertSuccess = styled.p`
@@ -95,11 +96,12 @@ export const AlertSuccess = styled.p`
   justify-content: center;
   background-color: #d1e7dd;
   color: #0f5132;
+  font-family: "Lato", sans-serif;
   margin: 20px 0;
   /* border: 1px solid #badbcc; */
   border-left: 4px solid #0f5132;
   border-radius: 4px;
-  padding: 7px;
+  padding: 14px;
 `;
 export const ValidationStyled = styled.div`
   color: red;

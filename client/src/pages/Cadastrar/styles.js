@@ -98,7 +98,7 @@ export const AlertSuccess = styled.p`
   /* border: 1px solid #badbcc; */
   border-left: 4px solid #0f5132;
   border-radius: 4px;
-  padding: 7px;
+  padding: 180px;
 `;
 export const ValidationStyled = styled.div`
   color: red;

@@ -114,16 +114,16 @@ export const Cadastrar = () => {
       <Conteudo>
         <Form onSubmit={handleSubmit}>
           <div className="promotion-form__group">
-            {status.type === "error" ? (
-              <AlertDanger>{status.mensagem}</AlertDanger>
-            ) : (
-              ""
-            )}
-            {status.type === "success" ? (
-              <AlertSuccess>{status.mensagem}</AlertSuccess>
-            ) : (
-              ""
-            )}
+          {status.type === "error" ? (
+          <AlertDanger><i className="far fa-frown lg">{status.mensagem}</i></AlertDanger>
+        ) : (
+          ""
+        )}
+        {status.type === "success" ? (
+          <AlertSuccess><i className="far fa-smile lg">{status.mensagem}</i></AlertSuccess>
+        ) : (
+          ""
+        )}
 
             <Label>Nome: </Label>
             <Input
