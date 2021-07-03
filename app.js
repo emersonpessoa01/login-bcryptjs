@@ -109,13 +109,6 @@ app.put("/usuario", eAdmin, async (req, res) => {
 
 //Apagar usuário
 app.delete("/usuario/:id", eAdmin, async (req, res) => {
-  await sleep(3000);
-
-  function sleep(ms) {
-    return new Promise((resolve) => {
-      setTimeout(resolve, ms);
-    });
-  }
 
   let id = req.params.id;
   await Usuario.destroy({

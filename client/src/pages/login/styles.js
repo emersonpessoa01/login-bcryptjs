@@ -94,12 +94,12 @@ export const AlertSuccess = styled.p`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #d1e7dd;
-  color: #0f5132;
   font-family: "Lato", sans-serif;
-  margin: 20px 0;
   /* border: 1px solid #badbcc; */
-  border-left: 4px solid #0f5132;
+  background-color: #e9fae9;
+  color: #0f5132;
+  margin: 20px 0;
+  border-left: 4px solid #75c375;
   border-radius: 4px;
   padding: 14px;
 `;

@@ -151,12 +151,14 @@ export const AlertSuccess = styled.p`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #d1e7dd;
+  /* background-color: #d1e7dd; */
   color: #0f5132;
+  background-color: #e9fae9;
+  /* color: #a0d7a0; */
   margin: 20px 0;
-  border-left: 4px solid #0f5132;;
+  border-left: 4px solid #75c375;
   border-radius: 4px;
-  padding: 7px;
+  padding: 14px;
 `;
 
 export const Conteudo = styled.section`

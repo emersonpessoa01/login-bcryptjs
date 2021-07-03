@@ -93,13 +93,14 @@ export const AlertSuccess = styled.p`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #d1e7dd;
+  background-color: #e9fae9;
   color: #0f5132;
   margin: 20px 0;
+  border-left: 4px solid #75c375;
   /* border: 1px solid #badbcc; */
-  border-left: 4px solid #0f5132;
   border-radius: 4px;
-  padding: 7px;
+  padding: 14px;
+
 `;
 export const ValidationStyled = styled.div`
   color: red;

@@ -116,12 +116,16 @@ export const Editar = (props) => {
 
       <Conteudo>
         {status.type === "error" ? (
-          <AlertDanger>{status.mensagem}</AlertDanger>
+          <AlertDanger>
+            <i className="far fa-frown lg">{status.mensagem}</i>
+          </AlertDanger>
         ) : (
           ""
         )}
         {status.type === "success" ? (
-          <AlertSuccess>{status.mensagem}</AlertSuccess>
+          <AlertSuccess>
+            <i className="far fa-grin-wink lg">{status.mensagem}</i>
+          </AlertSuccess>
         ) : (
           ""
         )}

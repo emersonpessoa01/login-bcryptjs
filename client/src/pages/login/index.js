@@ -109,12 +109,16 @@ export const Login = () => {
         <Titulo>Login</Titulo>
 
         {status.type === "error" ? (
-          <AlertDanger><i className="far fa-frown lg">{status.mensagem}</i></AlertDanger>
+          <AlertDanger>
+            <i className="far fa-frown lg">{status.mensagem}</i>
+          </AlertDanger>
         ) : (
           ""
         )}
         {status.type === "success" ? (
-          <AlertSuccess><i className="far fa-smile lg">{status.mensagem}</i></AlertSuccess>
+          <AlertSuccess>
+            <i className="far fa-grin-wink lg">{status.mensagem}</i>
+          </AlertSuccess>
         ) : (
           ""
         )}
