@@ -50,6 +50,8 @@ export const Editar = (props) => {
     await api
       .put("/usuario", { id, nome, email, senha }, { headers })
       .then((response) => {
+        console.log(response)
+
         if (response.data.error) {
           setStatus({
             formSave: false,
@@ -161,7 +163,7 @@ export const Editar = (props) => {
 
           {status.formSave ? (
             <ButtomWarningEdit type="submit" disabled size="sm">
-              <Spinner center color="warning" size="sm" />
+              <Spinner center="true" color="warning" size="sm" />
             </ButtomWarningEdit>
           ) : (
             <ButtomWarningEdit type="submit" size="sm">

@@ -71,7 +71,7 @@ export const Visualizar = (props) => {
       </ConteudoTitulo>
 
       <Conteudo>
-        <hr m-1 />
+        <hr  />
         {status.type === "error" ? (
           <AlertDanger>{status.mensagem}</AlertDanger>
         ) : (

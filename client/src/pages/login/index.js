@@ -102,6 +102,9 @@ export const Login = () => {
     },
   });
 
+  let dateCurrent = new Date().getFullYear();
+  // let dateCurrent = dateCurrent.getFullYear()
+
   return (
     <Container>
       <FormLogin>
@@ -170,7 +173,9 @@ export const Login = () => {
             <ButtomPrimary>Cadastrar</ButtomPrimary>
           </Link>
         </form>
-        <TituloFooter>Copyright 2021© emersonpessoa</TituloFooter>
+        <TituloFooter>
+          Copyright emersonpessoa© {dateCurrent}
+        </TituloFooter>
       </FormLogin>
     </Container>
   );

@@ -5,6 +5,11 @@ const bcrypt = require("bcryptjs");
 const cors = require("cors");
 const path = require("path");
 require("dotenv").config();
+/**
+ * const dotenv = require("dotenv");
+ * dotenv.config();
+ */
+
 // const { promisify } = require("util");
 const { eAdmin } = require("./middlewares/auth");
 const db = require("./models/db");
