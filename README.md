@@ -36,8 +36,8 @@
 *npm install --save sequelize*<br>
 * Instalar o Workbench<br>
 * Criar a base de dados executando o seguinte comando:<br>
-*CREATE DATABASE reac_imersao_8_0 CHARACTER SET utf8mb4 collate utf8mb4_unicode_ci*
-* Verificar a versão do MySQL onstalado na máquina<br>
+*CREATE DATABASE react_imersao_8_0 CHARACTER SET utf8mb4 collate utf8mb4_unicode_ci*
+* Verificar a versão do MySQL instalado na máquina<br>
 *mysql -u root -p*
 * Instalar módulo para criptografar a senha<br>
 *npm install --save bcryptjs*
